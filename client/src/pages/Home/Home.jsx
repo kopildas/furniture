@@ -1,7 +1,20 @@
 import React from "react";
 import HeroPic from "../../img/modern-living-room-interior-design (1).jpg";
+import { useState, useEffect } from 'react';
+
+
+  
+
 
 export default function Home() {
+  const [data, setData] = useState({ message: '' });
+
+  useEffect(() => {
+    fetch('http://localhost:4001/')
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error('Error:', error));
+  }, []);
   return (
     <div className="mt-20 m-10 p-10 z-40">
       <section>
@@ -9,8 +22,9 @@ export default function Home() {
           <div>
             <p className="text-6xl font-bold">
               Perfect <br /> Harmony: <br />
-              Comfort & Style{" "}
+              Comfort & Style{" "} 
             </p>
+            <p>{data.message}</p>
             <p className="text-xl mt-5 text-gray-500">
               Explore furniture that harmoniously combines comfort <br /> and
               style to elevate your home

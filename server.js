@@ -1,15 +1,37 @@
+import 'express-async-errors'
+import cors from 'cors'
 import express from 'express'
 import notFoundMiddleware from './middleware/not-found.js'
 import errorHandlerMiddleware from './middleware/error-handler.js'
 import dotenv from 'dotenv'
 import connectDB from './config/dbConn.js'
 import mongoose from 'mongoose'
+
 dotenv.config()
 
 // Connect to MongoDB
 connectDB();
 
 const app = express()
+
+//cors settings
+
+const allowedOrigins = ['http://localhost:4001', 'http://localhost:5173'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,PUT,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 
 //routers
@@ -25,7 +47,7 @@ app.use(express.json())
 
 
 app.get('/', (req,res) => {
-    res.send('Welcome')
+    res.json({ message: 'Welcome' });
 })
 
 app.use('/api/v1/auth',authRouter)
