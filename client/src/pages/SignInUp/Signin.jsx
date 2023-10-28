@@ -15,32 +15,34 @@ import { useNavigate } from "react-router-dom";
 // import { validateUserJWTTOken } from "../api";
 // import { useStateValue } from "../context/StateProvider";
 // import { actionType } from "../context/reducer";
+import axios from "axios";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
+import { toast } from "react-toastify";
 
 export default function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
+    lastname: "",
     email: "",
     password: "",
     confpassword: "",
-    phone: "",
   });
 
-
-  
-
+  const [{}, dispatch] = useStateValue();
   const navigate = useNavigate();
-//   const [{}, dispatch] = useStateValue();
+  //   const [{}, dispatch] = useStateValue();
 
-  const { username, email, password, phone, confpassword } = formData;
-
+  const { name, lastname, email, password, confpassword } = formData;
+  console.log(formData);
   const handleInputChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   };
-
+  const link = "http://localhost:4001";
   async function handleSignup(e) {
     e.preventDefault();
 
@@ -97,6 +99,29 @@ export default function Signin() {
     //   toast.error("Something went wrong with the registration!");
     //   console.log(error);
     // }
+    try {
+      const response = await axios.post(
+        `${link}/api/v1/auth/register`,
+        formData
+      );
+      console.log(response);
+      const { user, token } = response.data;
+      console.log(user);
+      console.log(token);
+      dispatch({
+        type: actionType.SET_USER,
+        user: user,
+        token: token,
+      });
+      localStorage.setItem("user", JSON.stringify(user, token));
+      localStorage.setItem("token", JSON.stringify(token));
+    } catch (err) {
+      const responseText = err.response.data;
+
+      console.log(responseText);
+      toast.error(responseText.msg);
+      console.log(err);
+    }
   }
   const [seen, setSeen] = useState(false);
   const togglePop = () => {
@@ -112,12 +137,22 @@ export default function Signin() {
         <h2 className="text-2xl text-center mb-6">Login</h2>
         <form onSubmit={handleSignup} className="bg-slate-200 p-5 rounded-md">
           <label className="mb-4">
-            Username:
+            name:
             <input
               className="input-field w-full"
               type="text"
-              id="username"
-              value={username}
+              id="name"
+              value={name}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label className="mb-4">
+            lastname:
+            <input
+              className="input-field w-full"
+              type="text"
+              id="lastname"
+              value={lastname}
               onChange={handleInputChange}
             />
           </label>
@@ -128,16 +163,6 @@ export default function Signin() {
               type="email"
               id="email"
               value={email}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label className="mb-4">
-            Phone:
-            <input
-              className="input-field w-full"
-              type="text"
-              id="phone"
-              value={phone}
               onChange={handleInputChange}
             />
           </label>

@@ -6,6 +6,8 @@ import { BrowserRouter as Router,
   Routes,
   Route,
   useLocation, } from 'react-router-dom'
+  import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Home from './pages/Home/Home'
 import About from './pages/About/About'
 import Shop from './pages/Shop/Shop'
@@ -29,6 +31,19 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         </Routes>
       </Router>
+
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
 
       </div>
     </>
