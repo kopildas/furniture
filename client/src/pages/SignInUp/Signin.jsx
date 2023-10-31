@@ -46,59 +46,6 @@ export default function Signin() {
   async function handleSignup(e) {
     e.preventDefault();
 
-    // for authentication using firebase auth
-    // try {
-    //   const auth = getAuth();
-    //   let user;
-    //   let formDataCopy;
-    //   if (password === confpassword) {
-    //     const userCredential = await createUserWithEmailAndPassword(
-    //       auth,
-    //       email,
-    //       password
-    //     ).then((userCred) => {
-    //       user = userCred.user;
-    //       console.log(user);
-    //       formDataCopy = { ...formData };
-    //       delete formDataCopy.password;
-    //       delete formDataCopy.confpassword;
-    //       formDataCopy.timestamp = serverTimestamp();
-    //       console.log(formDataCopy);
-    //       auth.onAuthStateChanged((cred) => {
-    //         if (cred) {
-    //           cred.getIdToken().then((token) => {
-    //             console.log(token);
-    //             validateUserJWTTOken(token).then(async (data) => {
-    //               console.log(data);
-    //               await setDoc(doc(db, "users", user.uid), formDataCopy);
-    //               dispatch({
-    //                 type: actionType.SET_USER,
-    //                 user: data,
-    //               });
-    //             });
-    //           });
-    //         }
-    //       });
-    //     });
-
-    //     await updateProfile(auth.currentUser, {
-    //       displayName: username,
-    //       phoneNumber: phone,
-    //     });
-    //     console.log(auth.currentUser);
-
-    //     //save into firebase storeage
-
-    //     // redirect to home page
-    //     toast.success("Registration done successfully..!");
-    //     navigate("/");
-    //   } else {
-    //     toast.error("Password not matched..!");
-    //   }
-    // } catch (error) {
-    //   toast.error("Something went wrong with the registration!");
-    //   console.log(error);
-    // }
     try {
       const response = await axios.post(
         `${link}/api/v1/auth/register`,
