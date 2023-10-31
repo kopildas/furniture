@@ -13,6 +13,9 @@ import About from './pages/About/About'
 import Shop from './pages/Shop/Shop'
 import Login from './pages/SignInUp/Login'
 import Signin from './pages/SignInUp/Signin'
+import PrivateAdminRoute from './component/Header/PrivateAdminRoute';
+import Dashboard from './pages/Admin/Dashboard';
+import AddProducts from './pages/Admin/AddProducts';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +32,10 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/admin" element={<PrivateAdminRoute/>}>
+          <Route path="/admin/dashboard" element={<Dashboard/>} />
+          <Route path="/admin/products/addproducts" element={<AddProducts/>} />
+        </Route>
         </Routes>
       </Router>
 

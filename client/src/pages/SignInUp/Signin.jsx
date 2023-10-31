@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 // import OAuth from "../components/OAuth";
 // import Login from "../components/Login";
 // import {
@@ -16,9 +16,9 @@ import { useNavigate } from "react-router-dom";
 // import { useStateValue } from "../context/StateProvider";
 // import { actionType } from "../context/reducer";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
-import { toast } from "react-toastify";
 
 export default function Signin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +30,7 @@ export default function Signin() {
     confpassword: "",
   });
 
-  const [{}, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   //   const [{}, dispatch] = useStateValue();
 
@@ -109,12 +109,12 @@ export default function Signin() {
       console.log(user);
       console.log(token);
       dispatch({
-        type: actionType.SET_USER,
+        type: actionType.REGISTER_USER_SUCCESS,
         user: user,
         token: token,
       });
-      localStorage.setItem("user", JSON.stringify(user, token));
-      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
     } catch (err) {
       const responseText = err.response.data;
 
@@ -123,6 +123,14 @@ export default function Signin() {
       console.log(err);
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [user, navigate]);
   const [seen, setSeen] = useState(false);
   const togglePop = () => {
     setSeen(!seen);

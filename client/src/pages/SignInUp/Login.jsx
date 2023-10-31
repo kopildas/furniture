@@ -1,16 +1,22 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import axios from "axios";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
+import { toast } from "react-toastify";
+
 
 export default function Login() {
-    const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const [{user}, dispatch] = useStateValue();
 
   const { email, password } = formData;
   // this function did not work it cant save state data and show it in dev
@@ -22,24 +28,49 @@ export default function Login() {
   }
 
 
+  const link = "http://localhost:4001";
+  //function for handling form submitting
+  async function handleLogin(e) {
+    e.preventDefault();
+    // Code to handle login goes here
+    try {
+      const response = await axios.post(
+        `${link}/api/v1/auth/login`,
+        formData
+      );
+      console.log(response);
+      const { user, token } = response.data;
+      console.log(user);
+      console.log(token);
+      dispatch({
+        type: actionType.LOGIN_USER_SUCCESS,
+        user: user,
+        token: token,
+      });
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", (token));
+    } catch (err) {
+      const responseText = err.response.data;
 
-    //function for handling form submitting
-    async function handleLogin(e) {
-        e.preventDefault();
-        // Code to handle login goes here
-        try {
-          
-        } catch (error) {
-        //   toast.error("Bad user credential")
-          console.log(error);
-        }
-        // toggle();
-      }
+      console.log(responseText);
+      toast.error(responseText.msg);
+      console.log(err);
+    }
+  }
+
+  useEffect(()=> {
+    if(user) {
+      setTimeout(() => {
+        navigate('/')
+      },3000)
+    }
+  },[user,navigate])
+    // toggle();
+  
 
   return (
     <>
-    <div className="mt-32 flex flex-col items-center justify-center">
-        
+      <div className="mt-32 flex flex-col items-center justify-center">
         <h2 className="text-2xl text-center mb-6">Login..</h2>
         <form onSubmit={handleLogin} className="bg-slate-200 rounded-lg p-5">
           <div className="mb-4">
@@ -105,7 +136,7 @@ export default function Login() {
           </div>
           {/* <OAuth /> */}
         </form>
-    </div>
+      </div>
     </>
-  )
+  );
 }

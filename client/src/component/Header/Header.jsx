@@ -74,6 +74,36 @@ export default function Header() {
               className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent `}
             ></li>
           </ul>
+          <ul className="flex">
+          <li
+              className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                pathMatchRoute("/login") &&
+                "text-black border border-sky-500 rounded-sm"
+              }`}
+              onClick={() => {
+                navigate("/login");
+                // adminOrNot();
+              }}
+            //   onMouseEnter={() => onMenter()}
+            //   onMouseLeave={() => onMleave()}
+            >
+              login
+            </li>
+            <li
+              className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                pathMatchRoute("/signin") &&
+                "text-black border border-sky-500 rounded-sm"
+              }`}
+              onClick={() => {
+                navigate("/signin");
+                // adminOrNot();
+              }}
+            //   onMouseEnter={() => onMenter()}
+            //   onMouseLeave={() => onMleave()}
+            >
+              Signin
+            </li>
+          </ul>
         </div>
       </div>
 

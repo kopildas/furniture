@@ -1,4 +1,3 @@
-import { initialState } from "./initialState";
 
 export const actionType = {
   SET_USER: "SET_USER",
@@ -6,9 +5,14 @@ export const actionType = {
   SET_FOOD_ITEMS: "SET_FOOD_ITEMS",
   SET_CART_SHOW: "SET_CART_SHOW",
   SET_CART_ITEMS: "SET_CART_ITEMS",
+
   REGISTER_USER_BEGIN: "REGISTER_USER_BEGIN",
   REGISTER_USER_SUCCESS: "REGISTER_USER_SUCCESS",
   REGISTER_USER_ERROR: "REGISTER_USER_ERROR",
+
+  LOGIN_USER_BEGIN: "LOGIN_USER_BEGIN",
+  LOGIN_USER_SUCCESS: "LOGIN_USER_SUCCESS",
+  LOGIN_USER_ERROR: "LOGIN_USER_ERROR",
 };
 
 const reducer = (state, action) => {
@@ -20,6 +24,12 @@ const reducer = (state, action) => {
         user: action.user,
       };
     case actionType.REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+        token: action.token,
+      };
+      case actionType.LOGIN_USER_SUCCESS:
       return {
         ...state,
         user: action.user,

@@ -47,7 +47,8 @@ app.use(express.json())
 
 
 app.get('/', (req,res) => {
-    res.json({ message: 'Welcome' });
+  res.render('./client/src/main.jsx')
+    // res.json({ message: 'Welcome' });
 })
 
 app.use('/api/v1/auth',authRouter)

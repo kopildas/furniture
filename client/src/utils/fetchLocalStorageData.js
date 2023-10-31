@@ -1,5 +1,3 @@
-import React from "react";
-import { json } from "react-router";
 
 export const fetchLocalStorageData = () => {
   const userInfo =
@@ -17,4 +15,13 @@ export const fetchCartData = () => {
       : localStorage.clear();
 
   return cartInfo ? cartInfo : [];
+};
+
+export const fetchtoken = () => {
+  const token =
+    localStorage.getItem("token") !== "undefined"
+      ? localStorage.getItem("token")
+      : localStorage.clear();
+
+  return token ? token : [];
 };
