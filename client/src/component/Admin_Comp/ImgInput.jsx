@@ -5,7 +5,7 @@ export default function ImgInput({id, uploadImage }) {
     <>
       <label>
         <div className="flex items-end justify-end p-2">
-          <div className="w-8 h-8 bg-slate-600 rounded-lg flex items-center justify-center cursor-pointer">
+          <div className="w-8 h-8 bg-slate-400 rounded-lg flex items-center justify-center cursor-pointer">
             <BsFillPencilFill />
           </div>
           <input

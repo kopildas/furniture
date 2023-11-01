@@ -71,6 +71,18 @@ const ProductSchema = new mongoose.Schema({
     default: null,
     maxlength: 100,
   },
+  rating :{
+    type: Number,
+    default: 0,
+  },
+  review_number :{
+    type: Number,
+    default: 0,
+  },
+  purchasing_number :{
+    type: Number,
+    default: 0,
+  }
 
 });
 
