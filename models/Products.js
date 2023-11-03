@@ -82,6 +82,10 @@ const ProductSchema = new mongoose.Schema({
   purchasing_number :{
     type: Number,
     default: 0,
+  },
+  feature_product : {
+    type: Boolean,
+    default: false,
   }
 
 });

@@ -25,7 +25,6 @@ const createProduct = async (req, res) => {
     !quantity ||
     !cartORadd ||
     !quantity ||
-    !sale ||
     !SKU ||
     !price ||
     !short_descrip ||
@@ -45,14 +44,76 @@ const createProduct = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ product });
 };
 const getAllProduct = async (req, res) => {
-  res.send("get all products");
+  const product = await Products.find();
+
+  res.status(StatusCodes.OK).json({ product });
 };
 const updateProduct = async (req, res) => {
-  res.send("update products");
+  const productId = req.params.id; // Assuming you pass the product ID in the request parameters
+
+  // Check if the product ID is valid (you can use a validation library or a custom validation function)
+  if (!productId) {
+    throw new BadReqError("Invalid product ID");
+  }
+
+  let featureProductValue = req.body; // Data to update the product
+
+  const product = await Products.findOne({_id: productId})
+
+  if(!product){
+    throw new BadReqError(`No job with id ${productId}`);
+  }
+
+
+  try {
+    // Use Mongoose to find and update the product by ID
+    const updateData = {
+      feature_product: featureProductValue, // Specify the field you want to update and its new value
+    };
+    
+    const updatedProduct = await Products.findOneAndUpdate(
+      { _id: productId },
+      req.body,
+      { new: true,
+      runValidators:true } // Return the updated document
+    );
+
+    if (!updatedProduct) {
+      throw new BadReqError("Product not found");
+    }
+
+    res.status(StatusCodes.OK).json({ product: updatedProduct });
+  } catch (error) {
+    // Handle any errors that occur during the update process
+    console.error(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Unable to update the product" });
+  }
 };
+
 const deleteProduct = async (req, res) => {
-  res.send("delete products");
+  const productId = req.params.id; // Assuming you pass the product ID in the request parameters
+
+  // Check if the product ID is valid (you can use a validation library or a custom validation function)
+  if (!productId) {
+    throw new BadReqError("Invalid product ID");
+  }
+
+  try {
+    // Use Mongoose to find and delete the product by ID
+    const deletedProduct = await Products.findOneAndDelete({ _id: productId });
+
+    if (!deletedProduct) {
+      throw new BadReqError("Product not found");
+    }
+
+    res.status(StatusCodes.OK).json({ message: "Product deleted successfully" });
+  } catch (error) {
+    // Handle any errors that occur during the delete process
+    console.error(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Unable to delete the product" });
+  }
 };
+
 const showStatsProduct = async (req, res) => {
   res.send("show stats");
 };

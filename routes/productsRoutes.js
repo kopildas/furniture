@@ -6,6 +6,6 @@ import { createProduct,deleteProduct,getAllProduct,updateProduct,showStatsProduc
 router.route('/').post(createProduct).get(getAllProduct)
 //remember about :id
 router.route('/stats').get(showStatsProduct)
-router.route('/:id').delete(deleteProduct).patch(updateProduct)
+router.route('/:id').delete(deleteProduct).put(updateProduct)
 
 export default router

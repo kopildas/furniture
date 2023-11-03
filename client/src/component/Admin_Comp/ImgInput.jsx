@@ -1,6 +1,7 @@
 import React from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 export default function ImgInput({id, uploadImage }) {
+ 
   return (
     <>
       <label>
