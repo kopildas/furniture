@@ -17,6 +17,15 @@ export const fetchCartData = () => {
   return cartInfo ? cartInfo : [];
 };
 
+export const fetchProduct = () => {
+  const product =
+    localStorage.getItem("product") !== "undefined"
+      ? JSON.parse(localStorage.getItem("product"))
+      : localStorage.clear();
+
+  return product ? product : [];
+};
+
 export const fetchtoken = () => {
   const token =
     localStorage.getItem("token") !== "undefined"

@@ -5,34 +5,50 @@ import Sidebar from "../../component/Admin_Comp/Sidebar/Sidebar";
 import Toggle_button from "../../component/Admin_Comp/Toggle_button";
 import EditProduct from "../../component/Admin_Comp/EditProduct";
 import DeleteProduct from "../../component/Admin_Comp/DeleteProduct";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
 
 export default function All_Products() {
-  const [data, setData] = useState(null);
+  const [{ product, user }, dispatch] = useStateValue();
+  console.log(product);
+  const [data, setData] = useState(product);
   const [editprod, setEditprod] = useState(null);
   const [deleteprod, setDeleteprod] = useState(null);
   const [editedData, setEditedData] = useState(null);
   const [visible, setVisible] = useState(false);
   function onClose() {
-    setVisible(!visible)
+    setVisible(!visible);
   }
   const [delvisible, setDelvisible] = useState(false);
+  const [updateFeature, setUpdateFeature] = useState(false);
   function delonClose() {
-    setDelvisible(!delvisible)
+    setDelvisible(!delvisible);
   }
 
   async function onSubmit() {
     console.log("holo");
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_LINK}/products`);
-      console.log(response.data.product);
-      setData(response.data.product);
-      toast.success("Product added succesfully..!");
-    } catch (err) {
-      const responseText = err.response.data;
+    if (!data || updateFeature) {
+      try {
+        setUpdateFeature(!updateFeature);
 
-      console.log(responseText);
-      toast.error(responseText.msg);
-      console.log(err);
+        const response = await axios.get(
+          `${import.meta.env.VITE_LINK}/products`
+        );
+        console.log(response.data.product);
+        setData(response.data.product);
+        toast.success("Product added succesfully..!");
+        dispatch({
+          type: actionType.SET_PRODUCTS,
+          product: response.data.product,
+        });
+        localStorage.setItem("product", JSON.stringify(response.data.product));
+      } catch (err) {
+        const responseText = err.response.data;
+
+        console.log(responseText);
+        toast.error(responseText.msg);
+        console.log(err);
+      }
     }
   }
 
@@ -45,10 +61,10 @@ export default function All_Products() {
   useEffect(() => {
     onSubmit();
     console.log("jolo");
-  }, [visible]);
-  // this useEffect could be crashed server 
-  // MongoServerError: Plan executor error during findAndModify :: caused by :: Performing an update on the path '_id' 
-// would modify the immutable field '_id'
+  }, []);
+  // this useEffect could be crashed server
+  // MongoServerError: Plan executor error during findAndModify :: caused by :: Performing an update on the path '_id'
+  // would modify the immutable field '_id'
 
   async function toggle_Switch(id) {
     try {
@@ -65,7 +81,7 @@ export default function All_Products() {
         `${import.meta.env.VITE_LINK}/products/${id}`,
         featureProductValue
       );
-
+      setUpdateFeature(!updateFeature);
       // Handle the response from the server (you can add more logic as needed)
       console.log(response);
       toast.success("Product feature status updated successfully!");
@@ -92,7 +108,7 @@ export default function All_Products() {
   }
 
   return (
-    <div className="mt-24 text-black flex">
+    <div className="mt-20 text-black flex">
       <Sidebar className="sticky scroll-m-0 z-50" />
 
       <div className="overflow-x-auto w-full p-10">
@@ -184,11 +200,11 @@ export default function All_Products() {
                   </td>
                   <td className="px-6 py-9 whitespace-no-wrap border-gray-200 flex gap-5">
                     <div
-                    className="text cursor-pointer"
+                      className="text cursor-pointer"
                       onClick={() => {
                         setEditprod(true);
-                        edited(item)
-                        onClose()
+                        edited(item);
+                        onClose();
                       }}
                     >
                       Edit
@@ -197,8 +213,8 @@ export default function All_Products() {
                       className="flex-1 cursor-pointer items-end justify-end"
                       onClick={() => {
                         setDeleteprod(true);
-                        edited(item)
-                        delonClose()
+                        edited(item);
+                        delonClose();
                       }}
                     >
                       {" "}
@@ -207,8 +223,20 @@ export default function All_Products() {
                   </td>
                 </tr>
               ))}
-              {editprod && <EditProduct item={editedData} onClose={onClose} visible={visible} />}
-              {deleteprod && <DeleteProduct item={editedData} delonClose={delonClose} delvisible={delvisible} />}
+            {editprod && (
+              <EditProduct
+                item={editedData}
+                onClose={onClose}
+                visible={visible}
+              />
+            )}
+            {deleteprod && (
+              <DeleteProduct
+                item={editedData}
+                delonClose={delonClose}
+                delvisible={delvisible}
+              />
+            )}
           </tbody>
         </table>
       </div>

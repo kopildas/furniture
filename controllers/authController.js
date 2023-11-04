@@ -48,4 +48,10 @@ const updateUser = async (req, res) => {
   res.send("update user");
 };
 
-export { register, login, updateUser };
+const getall = async (req, res) => {
+  const product = await Users.find();
+
+  res.status(StatusCodes.OK).json({ product });
+};
+
+export {getall, register, login, updateUser };

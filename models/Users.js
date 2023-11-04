@@ -13,9 +13,18 @@ const UserSchema = new mongoose.Schema({
   },
   lastname: {
     type: String,
-    default: "lastname",
+    default: "",
     maxlength: 20,
     trim: true,
+  },
+  image: {
+    type: String,
+    default: null,
+
+  },
+  purchased_product: {
+    type: Number,
+    default: 0,
   },
   email: {
     type: String,
@@ -31,6 +40,17 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide password"],
     minlength: 6,
     select: false,
+  },
+  location: {
+    type: String,
+    default: "",
+    maxlength: 20,
+    trim: true,
+  },
+  phone: {
+    type: String,
+    maxlength: 11,
+    default: "01700000000",
   },
 });
 

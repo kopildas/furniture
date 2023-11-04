@@ -25,12 +25,12 @@ export default function SidebarItem({ item, isOpen }) {
     );
   } else {
     return (
-      <a href={item.path || "#"} className={`flex sidebar-item plain`}>
+      <div  className={`flex sidebar-item plain cursor-pointer`}>
         <div className="flex gap-2">
           <div>{item.icon}</div>
           <div className="text text-xs">{isOpen && item.name}</div>
         </div>
-      </a>
+      </div>
     );
   }
 }

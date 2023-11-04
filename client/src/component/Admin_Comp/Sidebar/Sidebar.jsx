@@ -22,7 +22,7 @@ export default function Sidebar({ children }) {
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
     {
-      path: "/admin",
+      path: "/admin/dashboard",
       name: "Dashboard",
       icon: <FaTh />,
     },
