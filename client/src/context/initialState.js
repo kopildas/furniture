@@ -10,6 +10,7 @@ export const initialState = {
     token: token,
     product: product,
     cartShow:false,
+    updateProd:false,
     cartItems: cartInfo,
     
 }

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function SidebarItem({ item, isOpen }) {
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   if (item.childrens) {
     return (
       <div className={open ? "sidebar-item open" : "sidebar-item"}>
@@ -25,12 +26,14 @@ export default function SidebarItem({ item, isOpen }) {
     );
   } else {
     return (
-      <div  className={`flex sidebar-item plain cursor-pointer`}>
+      <NavLink
+              to={item.path}
+             className={`flex sidebar-item plain cursor-pointer`}>
         <div className="flex gap-2">
           <div>{item.icon}</div>
           <div className="text text-xs">{isOpen && item.name}</div>
         </div>
-      </div>
+        </NavLink>
     );
   }
 }

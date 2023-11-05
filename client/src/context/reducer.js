@@ -3,6 +3,7 @@ export const actionType = {
   SET_USER: "SET_USER",
   DEL_USER: "DEL_USER",
   SET_PRODUCTS: "SET_PRODUCTS",
+  UPDATE_PRODUCTS: "UPDATE_PRODUCTS",
   SET_CART_SHOW: "SET_CART_SHOW",
   SET_CART_ITEMS: "SET_CART_ITEMS",
 
@@ -23,6 +24,7 @@ const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
+      
     case actionType.REGISTER_USER_SUCCESS:
       return {
         ...state,
@@ -45,6 +47,11 @@ const reducer = (state, action) => {
         ...state,
         product: action.product,
       };
+      case actionType.UPDATE_PRODUCTS:
+        return {
+          ...state,
+          updateProd: action.updateProd,
+        };
     case actionType.SET_CART_SHOW:
       return {
         ...state,

@@ -43,11 +43,14 @@ const createProduct = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({ product });
 };
+
 const getAllProduct = async (req, res) => {
   const product = await Products.find();
+  const reversedProducts = product.reverse(); // Reverse the order of products
 
-  res.status(StatusCodes.OK).json({ product });
+  res.status(StatusCodes.OK).json({ product: reversedProducts });
 };
+
 const updateProduct = async (req, res) => {
   const productId = req.params.id; // Assuming you pass the product ID in the request parameters
 

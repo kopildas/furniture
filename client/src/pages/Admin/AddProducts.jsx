@@ -7,10 +7,13 @@ import ImgShow from "../../component/Admin_Comp/ImgShow";
 import Sidebar from "../../component/Admin_Comp/Sidebar/Sidebar";
 import Loader from "../../component/Loader";
 import { toast } from "react-toastify";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
 
 export default function AddProducts() {
   const [isLoadding, setIsLoadding] = useState(false);
-  
+  const [{ product, user }, dispatch] = useStateValue();
+
   // const [imgURL, setImgURL] = useState(null);
   // const [gal_1_imgURL, setGal_1_ImgURL] = useState(null);
   // const [gal_2_imgURL, setGal_2_ImgURL] = useState(null);
@@ -170,8 +173,14 @@ console.log(catego);
     else{
     try {
       const response = await axios.post(`${import.meta.env.VITE_LINK}/products`, formData);
-      console.log(response);
-      toast.success("Product added succesfully..!")
+      console.log(response.data.product);
+        // setData(response.data.product);
+        // toast.success("Product added succesfully..!");
+        dispatch({
+          type: actionType.UPDATE_PRODUCTS,
+          updateProd: true,
+        });
+        // localStorage.setItem("product", JSON.stringify(response.data.product));
       // const { user, token } = response.data;
       // console.log(user);
       // console.log(token);

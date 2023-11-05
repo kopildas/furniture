@@ -9,7 +9,7 @@ import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 
 export default function All_Products() {
-  const [{ product, user }, dispatch] = useStateValue();
+  const [{ product, user,updateProd }, dispatch] = useStateValue();
   console.log(product);
   const [data, setData] = useState(product);
   const [editprod, setEditprod] = useState(null);
@@ -27,10 +27,13 @@ export default function All_Products() {
 
   async function onSubmit() {
     console.log("holo");
-    if (!data || updateFeature) {
+    if (!data || updateFeature || updateProd) {
       try {
         setUpdateFeature(!updateFeature);
-
+        dispatch({
+          type: actionType.UPDATE_PRODUCTS,
+          updateProd: false,
+        });
         const response = await axios.get(
           `${import.meta.env.VITE_LINK}/products`
         );
