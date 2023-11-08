@@ -2,19 +2,66 @@ import React from "react";
 import HeroPic from "../../img/modern-living-room-interior-design (1).jpg";
 import { useState, useEffect } from 'react';
 
-
+import '@splidejs/react-splide/css/skyblue';
+import '@splidejs/react-splide/css/sea-green';
+import Category from "../../component/Home/Category";
+import InfoDiv_1 from "../../component/Home/InfoDiv_1";
+import Products from "../../component/Home/Products";
+import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
+import axios from "axios";
+import { toast } from "react-toastify";
   
 
 
 export default function Home() {
   const [data, setData] = useState({ message: '' });
+  const [{ product, user,updateProd }, dispatch] = useStateValue();
+
+
+  async function fetchingData() {
+    console.log("holo");
+    if (!data || updateProd) {
+      try {
+        // setUpdateFeature(!updateFeature);
+        dispatch({
+          type: actionType.UPDATE_PRODUCTS,
+          updateProd: false,
+        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_LINK}/products`
+        );
+        console.log(response.data.product);
+        setData(response.data.product);
+        // toast.success("Product added succesfully..!");
+        dispatch({
+          type: actionType.SET_PRODUCTS,
+          product: response.data.product,
+        });
+        localStorage.setItem("product", JSON.stringify(response.data.product));
+      } catch (err) {
+        const responseText = err.response.data;
+
+        console.log(responseText);
+        toast.error(responseText.msg);
+        console.log(err);
+      }
+    }
+  }
+
+
 
   useEffect(() => {
-    fetch('http://localhost:4001/')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error:', error));
+
+    fetchingData();
+
+    // fetch('http://localhost:4001/')
+    //   .then(response => response.json())
+    //   .then(data => setData(data))
+    //   .catch(error => console.error('Error:', error));
   }, []);
+
+  console.log(data);
   return (
     <div className="mt-16 p-5 md:m-10 md:p-10 z-40">
       <section>
@@ -72,6 +119,32 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+      <section>
+        <div className="text-black mt-10 p-5 flex flex-col">
+          <div className="flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between">
+            <div className="flex flex-col items-center justify-center  md:items-start md:justify-between mt-10">
+              <p className="hidden md:block text-2xl font-semibold text-gray-900">BROWSE BY CATEGORIES</p>
+              <p className="md:hidden block text-2xl font-semibold text-gray-900">BROWSE</p>
+              <p className="md:hidden block text-2xl font-semibold text-gray-900">BY CATEGORIES</p>
+              <p className="text-gray-700">Check out our feature products</p>
+            </div>
+            <div>
+            <button className="rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5">
+              View All Categories
+            </button>
+            </div>
+          </div>
+          <Category/>
+        </div>
+      </section>
+
+      <section className="hidden md:block">
+        <InfoDiv_1/>
+      </section>
+
+      <section>
+        <Products/>
       </section>
     </div>
   );

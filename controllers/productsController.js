@@ -1,4 +1,5 @@
 import Products from "../models/Products.js";
+import ProductsMongoDb from "../models/ProductsMongoDb.js";
 import { StatusCodes } from "http-status-codes";
 import BadReqError from "../errors/badREQerror.js";
 
@@ -121,10 +122,42 @@ const showStatsProduct = async (req, res) => {
   res.send("show stats");
 };
 
+
+
+const updateOrAddFieldToAllProducts = async (req, res) => {
+  try {
+    // const updateResult = await Products.find(
+    //   {quantity: {$lt:100}},
+    //   { $set: { offer: null } },
+    //   { upsert: true }
+    // );
+    // const updateResult = await ProductsMongoDb.find({offer: {$lt:100}}).toArray();
+
+    const updateResult = await ProductsMongoDb.find({offer: {$not: {$eq:null}}}).toArray();
+
+    if (!updateResult) {
+      throw new BadReqError("Failed to update or add the field in all products");
+    }
+    console.log(updateResult);
+    res.status(StatusCodes.OK).json({ product: updateResult });
+    console.log(`Updated or added the field in products.`);
+  } catch (error) {
+    console.error(error);
+    throw new BadReqError("Failed to update or add the field in all products");
+  }
+};
+
+
+
+
+
+
+
 export {
   createProduct,
   getAllProduct,
   updateProduct,
   deleteProduct,
   showStatsProduct,
+  updateOrAddFieldToAllProducts,
 };

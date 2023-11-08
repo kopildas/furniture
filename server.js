@@ -6,6 +6,7 @@ import errorHandlerMiddleware from './middleware/error-handler.js'
 import dotenv from 'dotenv'
 import connectDB from './config/dbConn.js'
 import mongoose from 'mongoose'
+import Products from "./models/Products.js";
 
 dotenv.config()
 
@@ -46,8 +47,10 @@ notFoundMiddleware
 app.use(express.json())
 
 
-app.get('/', (req,res) => {
+app.get('/', async(req,res) => {
   // res.render('./client/src/main.jsx')
+    const getProduct= await Products.find({}).toArray();
+    console.log(getProduct);
     res.json({ message: 'Welcome' });
 })
 
