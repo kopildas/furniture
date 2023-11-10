@@ -40,3 +40,22 @@
 .read-the-docs {
   color: #888;
 }
+
+.horizontal-slider {
+  width: 100%;
+  background: #275efe;
+  /* height: 10px; */
+}
+.horizontal-slider .example-thumb {
+  width: 23px;
+  height: 23px;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #275efe;
+  padding: 3px;
+  
+  top: -9px;
+  /* height: 10px; */
+}
+

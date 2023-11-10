@@ -1,4 +1,3 @@
-
 export const actionType = {
   SET_USER: "SET_USER",
   DEL_USER: "DEL_USER",
@@ -6,6 +5,8 @@ export const actionType = {
   UPDATE_PRODUCTS: "UPDATE_PRODUCTS",
   SET_CART_SHOW: "SET_CART_SHOW",
   SET_CART_ITEMS: "SET_CART_ITEMS",
+
+  SET_SHOP_CATEGORY: "SET_SHOP_CATEGORY",
 
   REGISTER_USER_BEGIN: "REGISTER_USER_BEGIN",
   REGISTER_USER_SUCCESS: "REGISTER_USER_SUCCESS",
@@ -17,41 +18,47 @@ export const actionType = {
 };
 
 const reducer = (state, action) => {
-
   switch (action.type) {
     case actionType.SET_USER:
       return {
         ...state,
         user: action.user,
       };
-      
+
     case actionType.REGISTER_USER_SUCCESS:
       return {
         ...state,
         user: action.user,
         token: action.token,
       };
-      case actionType.LOGIN_USER_SUCCESS:
+
+    case actionType.SET_SHOP_CATEGORY:
+      return {
+        ...state,
+        shop_category: action.shop_category,
+      };
+    
+    case actionType.LOGIN_USER_SUCCESS:
       return {
         ...state,
         user: action.user,
         token: action.token,
       };
-      case actionType.DEL_USER:
-        return {
-          ...state,
-          user: null,
-        };
+    case actionType.DEL_USER:
+      return {
+        ...state,
+        user: null,
+      };
     case actionType.SET_PRODUCTS:
       return {
         ...state,
         product: action.product,
       };
-      case actionType.UPDATE_PRODUCTS:
-        return {
-          ...state,
-          updateProd: action.updateProd,
-        };
+    case actionType.UPDATE_PRODUCTS:
+      return {
+        ...state,
+        updateProd: action.updateProd,
+      };
     case actionType.SET_CART_SHOW:
       return {
         ...state,

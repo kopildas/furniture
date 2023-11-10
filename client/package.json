@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/runtime": "^7.23.2",
     "@splidejs/react-splide": "^0.7.12",
     "axios": "^1.6.0",
     "chart.js": "^4.4.0",
@@ -20,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.17.0",
+    "react-slider": "^2.0.6",
     "react-tailwindcss-select": "^1.8.5",
     "react-toastify": "^9.1.3"
   },

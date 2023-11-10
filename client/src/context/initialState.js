@@ -12,5 +12,5 @@ export const initialState = {
     cartShow:false,
     updateProd:false,
     cartItems: cartInfo,
-    
+    shop_category : "All",
 }

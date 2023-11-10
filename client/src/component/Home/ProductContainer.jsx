@@ -1,16 +1,40 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {BsCartPlusFill} from 'react-icons/bs'
-import {MdShoppingBasket} from 'react-icons/md'
-import {GrFormView} from 'react-icons/gr'
-import {IoEyeSharp} from 'react-icons/io5'
+import { BsCartPlusFill } from "react-icons/bs";
+import { MdShoppingBasket } from "react-icons/md";
+import { GrFormView } from "react-icons/gr";
+import { IoEyeSharp } from "react-icons/io5";
+import ViewProduct from "./ViewProduct";
 
 export default function ProductContainer({ data }) {
   const rowContainer = useRef();
   const [flag, setFlag] = useState(false);
+  const [view, setView] = useState(false);
+  const [specific_data, setSpecific_data] = useState(null);
   const [gridORlist, setGridORlist] = useState(true);
   const navigate = useNavigate();
+
+
+
+  const stopEventPropagationTry = (event) => {
+    if (event.target != event.currentTarget) {
+      event.stopPropagation();
+    }
+  };
+
+  const viewProd = (item)=> {
+    setSpecific_data(item);
+    setView(!view)
+  }
+
+  const handleOnClose = () => {
+    setView(!view)
+  };
+
+
+
+
   return (
     <div className="text-gray-900">
       {/* laptop view */}
@@ -39,24 +63,23 @@ export default function ProductContainer({ data }) {
               <div className={`${flag ? "flex flex-row" : "flex flex-col"}`}>
                 <div className="flex items-center justify-center w-full bg-gray-50 rounded-br-[30px] z-30">
                   <div className="m-4 w-full z-30 hover:z-40">
-                  <motion.img
-                    whileHover={{ scale: 1.2 }}
-                    src={item?.image}
-                    alt=""
-                    className={`w-full h-60 ${
-                      flag ? "rounded-lg" : "rounded-md"
-                    }  -mt-7 drop-shadow-2xl `}
-                  />
-                  
+                    <motion.img
+                      whileHover={{ scale: 1.2 }}
+                      src={item?.image}
+                      alt=""
+                      className={`w-full h-60 ${
+                        flag ? "rounded-lg" : "rounded-md"
+                      }  -mt-7 drop-shadow-2xl `}
+                    />
                   </div>
                   {item.offer && (
-                    <div >
-                    <div className="w-14 h-6 bg-red-500 absolute top-5 left-2 z-30 rounded-e-md flex items-center justify-center">
+                    <div>
+                      <div className="w-14 h-6 bg-red-500 absolute top-5 left-2 z-30 rounded-e-md flex items-center justify-center">
                         <p>{item.offer}</p>
+                      </div>
+                      <div className="w-14 h-6 bg-red-400 absolute top-[29px] left-0 z-10"></div>
+                      <div className="w-14 h-10 bg-red-200 absolute top-[30px] left-[14px] rotate-45 z-10"></div>
                     </div>
-                    <div className="w-14 h-6 bg-red-400 absolute top-[29px] left-0 z-10"></div>
-                    <div className="w-14 h-10 bg-red-200 absolute top-[30px] left-[14px] rotate-45 z-10"></div>
-                  </div>
                   )}
                 </div>
                 <div className="w-10 h-10 bg-gray-300 absolute right-0 top-[13rem] z-10"></div>
@@ -102,35 +125,32 @@ export default function ProductContainer({ data }) {
                         </p>
                       </p>
                     )}
+
                     <div className="flex flex-col absolute right-2 top-[17rem] ">
-                    <motion.div
-                      whileTap={{ scale: 1.2 }}
-                      className="flex items-center justify-center w-12 h-12 text-2xl bg-orange-00  rounded-full cursor-pointer hover:shadow-md"
-                      onClick={(e) => {
+                      <motion.div
+                        whileTap={{ scale: 1.2 }}
+                        className="flex items-center justify-center w-12 h-12 text-2xl bg-orange-00  rounded-full cursor-pointer hover:shadow-lg"
+                        onClick={(e) => {
+                          stopEventPropagationTry(e); // Prevent event from propagating
+                          viewProd(item);
+                        }}
+                      >
+                        <IoEyeSharp className="" />
+                      </motion.div>
+                      <motion.div
+                        whileTap={{ scale: 1.2 }}
+                        className="flex items-center justify-center w-12 h-12 text-2xl bg-orange-00  rounded-full cursor-pointer hover:shadow-lg"
+                        onClick={(e) => {
                           stopEventPropagationTry(e); // Prevent event from propagating
                           addtoCart(item);
-                      }}
-                    >
-                      {item?.cartORadd === "cart" ? (
-                  <IoEyeSharp className="" />
-                ) : (
-                  <BsCartPlusFill className="" />
-                )}
-                    </motion.div>
-                    <motion.div
-                      whileTap={{ scale: 1.2 }}
-                      className="flex items-center justify-center w-12 h-12 text-2xl bg-orange-00  rounded-full cursor-pointer hover:shadow-md"
-                      onClick={(e) => {
-                          stopEventPropagationTry(e); // Prevent event from propagating
-                          addtoCart(item);
-                      }}
-                    >
-                      {item?.cartORadd === "cart" ? (
-                  <MdShoppingBasket className="" />
-                ) : (
-                  <BsCartPlusFill className="" />
-                )}
-                    </motion.div>
+                        }}
+                      >
+                        {item?.cartORadd === "cart" ? (
+                          <MdShoppingBasket className="" />
+                        ) : (
+                          <BsCartPlusFill className="" />
+                        )}
+                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -138,6 +158,14 @@ export default function ProductContainer({ data }) {
               {/* </NavLink> */}
             </div>
           ))}
+           {view && specific_data ? (
+                          <ViewProduct
+                            // addDataNotifi={addingNewData}
+                            onClose={handleOnClose}
+                            visible={view}
+                            data={specific_data}
+                          />
+                        ) : null}
       </div>
 
       {/* mobile view */}

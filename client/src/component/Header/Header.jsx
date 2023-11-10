@@ -14,6 +14,7 @@ import { AiOutlineMail,AiFillYoutube,AiFillFacebook } from "react-icons/ai";
 import { BsTelephone,BsTwitter, BsInstagram } from "react-icons/bs";
 import { MdShoppingBasket } from "react-icons/md";
 import { useStateValue } from "../../context/StateProvider";
+import { actionType } from "../../context/reducer";
 
 export default function Header() {
   const [{ product, user,cartItems }, dispatch] = useStateValue();
@@ -33,27 +34,27 @@ export default function Header() {
 
   const DropmenuItem = [
     {
-      path: "/product",
+      path: "/shop",
       name: "Chair",
       icon: <FaTh />,
     },
     {
-      path: "/product",
-      name: "sofa",
+      path: "/shop",
+      name: "Sofa",
       icon: <FaTh />,
     },
     {
-      path: "/product",
+      path: "/shop",
       name: "Table",
       icon: <FaUserAlt />,
     },
     {
-      path: "/product",
+      path: "/shop",
       name: "Bed",
       icon: <FaUserAlt />,
     },
     {
-      path: "/product",
+      path: "/shop",
       name: "Closet",
       icon: <FaUserAlt />,
     },
@@ -76,6 +77,18 @@ export default function Header() {
       return true;
     }
   }
+
+  const shop_route = (e)=>  {
+    console.log(e.target.id);
+    dispatch({
+      type: actionType.SET_SHOP_CATEGORY,
+      shop_category: e.target.id,
+    })
+  }
+
+
+
+
 
   return (
     <header className=" z-50 w-screen bg-white h-20 p-6 px-16">
@@ -162,6 +175,8 @@ export default function Header() {
                         <NavLink
                           key={index}
                           to={item.path} // Use NavLink to navigate
+                          id={item.name}
+                          onClick={shop_route}
                           className="block px-4 py-2 text-gray-700 hover:text-black hover:bg-slate-100"
                         >
                           {item.name}

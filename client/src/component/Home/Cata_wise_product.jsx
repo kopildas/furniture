@@ -4,7 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ProductContainer from "./ProductContainer";
 
-export default function Products() {
+export default function Cata_wise_product
+() {
   const [{ product, user }, dispatch] = useStateValue();
 
   const new_arrival_Products = product.slice(0, 8);
@@ -14,8 +15,9 @@ export default function Products() {
 
   console.log(data);
   console.log(product);
+
+
   async function sorting_product(e) {
-    console.log(e.target.id);
     setActiveCategory(e.target.id)
     if(e.target.id === "new_arrival"){
       const firstEightProducts = product.slice(0, 8);
@@ -60,7 +62,7 @@ export default function Products() {
           <button
             id="new_arrival"
             onClick={sorting_product}
-            className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${activeCategory==="new_arrival" && "bg-gray-900 text-gray-50"} hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
+            className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${activeCategory==="new_arrival" && "bg-gray-900 text-gray-100"} hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
           >
             New Arrival
           </button>
@@ -68,7 +70,7 @@ export default function Products() {
           <button
             id="special_offer"
             onClick={sorting_product}
-            className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${activeCategory==="special_offer" && "bg-gray-900 text-gray-50"} hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
+            className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${activeCategory==="special_offer" && "bg-gray-900 text-gray-100"} hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
           >
             Special Offer
           </button>
@@ -76,7 +78,7 @@ export default function Products() {
           <button
             id="best_sellers"
             onClick={sorting_product}
-            className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${activeCategory==="best_sellers" && "bg-gray-900 text-gray-50"} hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
+            className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${activeCategory==="best_sellers" && "bg-gray-900 text-gray-100"} hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
           >
             Best Sellers
           </button>

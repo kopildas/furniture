@@ -6,11 +6,12 @@ import '@splidejs/react-splide/css/skyblue';
 import '@splidejs/react-splide/css/sea-green';
 import Category from "../../component/Home/Category";
 import InfoDiv_1 from "../../component/Home/InfoDiv_1";
-import Products from "../../component/Home/Products";
+// import Products from "../../component/Home/Cata_wise_product";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Cata_wise_product from "../../component/Home/Cata_wise_product";
   
 
 
@@ -21,16 +22,19 @@ export default function Home() {
 
   async function fetchingData() {
     console.log("holo");
-    if (!data || updateProd) {
+    if (data) {
       try {
         // setUpdateFeature(!updateFeature);
         dispatch({
           type: actionType.UPDATE_PRODUCTS,
           updateProd: false,
         });
+        console.log("jhda")
+
         const response = await axios.get(
           `${import.meta.env.VITE_LINK}/products`
         );
+        
         console.log(response.data.product);
         setData(response.data.product);
         // toast.success("Product added succesfully..!");
@@ -38,6 +42,7 @@ export default function Home() {
           type: actionType.SET_PRODUCTS,
           product: response.data.product,
         });
+        localStorage.removeItem("product");
         localStorage.setItem("product", JSON.stringify(response.data.product));
       } catch (err) {
         const responseText = err.response.data;
@@ -144,7 +149,8 @@ export default function Home() {
       </section>
 
       <section>
-        <Products/>
+        
+        <Cata_wise_product/>
       </section>
     </div>
   );
