@@ -10,4 +10,6 @@ const client = new MongoClient(uri, {
   }
 });
 
-export default client.db("woodhyDB").collection("products");
+// Exporting individual collections
+export const ProductsMongoDb = client.db("woodhyDB").collection("products");
+export const ReviewDB = client.db("woodhyDB").collection("review");

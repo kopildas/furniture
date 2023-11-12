@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../img/woodhy-high-resolution-logo-transparent.png";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import SidebarItem from "../Admin_Comp/Sidebar/SidebarItem";
@@ -10,14 +10,14 @@ import {
   FaThList,
   FaUserAlt,
 } from "react-icons/fa";
-import { AiOutlineMail,AiFillYoutube,AiFillFacebook } from "react-icons/ai";
-import { BsTelephone,BsTwitter, BsInstagram } from "react-icons/bs";
+import { AiOutlineMail, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
+import { BsTelephone, BsTwitter, BsInstagram } from "react-icons/bs";
 import { MdShoppingBasket } from "react-icons/md";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 
 export default function Header() {
-  const [{ product, user,cartItems }, dispatch] = useStateValue();
+  const [{ product, user, cartItems }, dispatch] = useStateValue();
   console.log(user);
   const navigate = useNavigate();
   const location = useLocation();
@@ -78,17 +78,33 @@ export default function Header() {
     }
   }
 
-  const shop_route = (e)=>  {
+  const shop_route = (e) => {
     console.log(e.target.id);
     dispatch({
       type: actionType.SET_SHOP_CATEGORY,
       shop_category: e.target.id,
-    })
-  }
+    });
+  };
 
-
-
-
+  const userClick = (e) => {
+    console.log("kire vai");
+    console.log(e.target.id);
+    if (e.target.id === "Log Out") {
+      dispatch({
+        type: actionType.LOG_OUT_USER,
+        user: null,
+        token: null,
+      });
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+     
+    }
+  };
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <header className=" z-50 w-screen bg-white h-20 p-6 px-16">
@@ -108,15 +124,13 @@ export default function Header() {
             </div>
             <div className="flex gap-5 text-xl">
               <BsInstagram />
-              <AiFillFacebook/>
-              <BsTwitter/>
-              <AiFillYoutube/>
+              <AiFillFacebook />
+              <BsTwitter />
+              <AiFillYoutube />
             </div>
           </div>
 
-          <div className="w-full border-b mt-2 mb-3">
-
-          </div>
+          <div className="w-full border-b mt-2 mb-3"></div>
 
           <div className="hidden md:flex w-full h-full item-center justify-between">
             <div>
@@ -248,6 +262,8 @@ export default function Header() {
                           <NavLink
                             key={index}
                             to={item.path} // Use NavLink to navigate
+                            id={item.name}
+                            onClick={userClick}
                             className="block px-4 py-2 text-gray-700 hover:text-black hover:bg-slate-100"
                           >
                             {item.name}
@@ -264,7 +280,7 @@ export default function Header() {
 
         {/* Mobile */}
         <div className="md:hidden flex justify-between items-center px-3 max-w-6xl mx-auto">
-        <FaBars
+          <FaBars
             onClick={() => setIsOpen(!isOpen)}
             className="text-3xl text-gray-500 cursor-pointer"
           />
@@ -278,24 +294,24 @@ export default function Header() {
             }}
           />
           <div
-                className="relative flex items-center justify-center gap-9"
-                // onClick={cartShowing}
-              >
-                <MdShoppingBasket className="md:text-2xl text-4xl text-gray-500 cursor-pointer" />
-                {cartItems && cartItems.length > 0 && (
-                  <div className="absolute -top-1 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-                    <p className="text-white font-semibold text-xs">
-                      {cartItems.length}
-                    </p>
-                  </div>
-                )}
+            className="relative flex items-center justify-center gap-9"
+            // onClick={cartShowing}
+          >
+            <MdShoppingBasket className="md:text-2xl text-4xl text-gray-500 cursor-pointer" />
+            {cartItems && cartItems.length > 0 && (
+              <div className="absolute -top-1 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                <p className="text-white font-semibold text-xs">
+                  {cartItems.length}
+                </p>
               </div>
+            )}
+          </div>
         </div>
 
         {isOpen && (
           <div className="md:hidden w-screen bg-black text-white">
             <ul className="text-center">
-              { DropmenuItem.map((item) => (
+              {DropmenuItem.map((item) => (
                 <li
                   key={item.path}
                   className={`cursor-pointer py-3 text-sm font-semibold border-b ${

@@ -1,6 +1,6 @@
 export const actionType = {
   SET_USER: "SET_USER",
-  DEL_USER: "DEL_USER",
+  LOG_OUT_USER: "LOG_OUT_USER",
   SET_PRODUCTS: "SET_PRODUCTS",
   UPDATE_PRODUCTS: "UPDATE_PRODUCTS",
   SET_CART_SHOW: "SET_CART_SHOW",
@@ -31,13 +31,19 @@ const reducer = (state, action) => {
         user: action.user,
         token: action.token,
       };
+    case actionType.LOG_OUT_USER:
+      return {
+        ...state,
+        user: action.user,
+        token: action.token,
+      };
 
     case actionType.SET_SHOP_CATEGORY:
       return {
         ...state,
         shop_category: action.shop_category,
       };
-    
+
     case actionType.LOGIN_USER_SUCCESS:
       return {
         ...state,

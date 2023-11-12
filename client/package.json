@@ -20,6 +20,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.17.0",
     "react-slider": "^2.0.6",
     "react-tailwindcss-select": "^1.8.5",

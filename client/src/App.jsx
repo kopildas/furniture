@@ -19,6 +19,7 @@ import AddProducts from './pages/Admin/AddProducts';
 import All_Products from './pages/Admin/All_Products';
 import EditProduct from './component/Admin_Comp/EditProduct';
 import Users from './pages/Admin/Users';
+import SingleItem from './pages/Shop/SingleItem';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/singleitem/:id" element={<SingleItem />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/admin" element={<PrivateAdminRoute/>}>

@@ -1,5 +1,5 @@
 import Products from "../models/Products.js";
-import ProductsMongoDb from "../models/ProductsMongoDb.js";
+import { ReviewDB,ProductsMongoDb } from "../models/ProductsMongoDb.js";
 import { StatusCodes } from "http-status-codes";
 import BadReqError from "../errors/badREQerror.js";
 
@@ -65,7 +65,7 @@ const updateProduct = async (req, res) => {
   const product = await Products.findOne({_id: productId})
 
   if(!product){
-    throw new BadReqError(`No job with id ${productId}`);
+    throw new BadReqError(`No product with id ${productId}`);
   }
 
 
@@ -152,6 +152,67 @@ const updateOrAddFieldToAllProducts = async (req, res) => {
 
 
 
+const createReview = async (req, res) => {
+  const {
+    item_id,
+    user_id,
+    user_name,
+    user_pic,
+    rating,
+    review,
+    date,
+    
+  } = req.body;
+
+  if (
+    !item_id ||
+    !user_id ||
+    !user_name ||
+    !user_pic ||
+    !rating ||
+    !review ||
+    !date
+  ) {
+    throw new BadReqError("Please provide all values");
+  }
+
+  // if (typeof sale !== 'number') {
+  //   throw new BadReqError("Selling price should be lower than the regular price");
+  // }
+  
+
+  const reviews = await ReviewDB.insertOne(req.body);
+
+  res.status(StatusCodes.CREATED).json({ reviews });
+};
+
+
+
+const getReview = async (req, res) => {
+  try {
+    const itemId = req.params.id; // Assuming you pass the product ID in the request parameters
+
+    // Check if the product ID is valid (you can use a validation library or a custom validation function)
+    if (!itemId) {
+      throw new BadReqError("Invalid product ID");
+    }
+
+    const reviews = await ReviewDB.find({ item_id: itemId }).toArray();
+
+    console.log(reviews);
+
+    res.status(StatusCodes.OK).json({ reviews: reviews });
+  } catch (error) {
+    console.error(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Internal Server Error" });
+  }
+};
+
+
+
+
+
+
 
 export {
   createProduct,
@@ -160,4 +221,6 @@ export {
   deleteProduct,
   showStatsProduct,
   updateOrAddFieldToAllProducts,
+  createReview,
+  getReview,
 };

@@ -48,6 +48,7 @@ export default function Shop() {
 
   const sortBY = (e) => {
     console.log(e.target.value);
+    setSortValue(e.target.id)
     let sortedCopy = [...data];
     if (e.target.value === "a-z") {
       sortedCopy = sortedCopy.sort((a, b) =>
@@ -79,9 +80,13 @@ export default function Shop() {
   const grid = "grid";
   const list = "list";
 
-  const grid_or_list_view = (id) => {
-    setGridOrlist(id);
+  const grid_or_list_view = (value) => {
+    console.log(value);
+    setGridOrlist(value);
   };
+
+  console.log(gridORlist);
+
 
   let updata;
   // useEffect(() => {
@@ -93,6 +98,7 @@ export default function Shop() {
 
   useEffect(() => {
     setLength(data.length)
+    sortBY
     if(length===0)
     {
       // console.log(data.length());
@@ -117,16 +123,19 @@ export default function Shop() {
     }
     console.log(updata);
     setData(updata)
-    sortBY
+    
   }, [activeCatagory,price]);
 
 console.log(data)
   return (
     <div className="mt-12 text-black">
-      <div className="w-full h-5 bg-slate-600"></div>
+      <div className=" h-10 w-screen p-10 bg-gray-100 flex items-center justify-between">
+        <p className="text-xl font-semibold text-gray-800">SHOP</p>
+        <p className="text-xl font-semibold text-gray-800">`Home : Shop`</p>
+      </div>
 
       <div className="m-10 flex gap-5">
-        <div className="w-72 flex flex-col">
+        <div className="w-72 flex flex-col h-screen sticky overflow-y-auto top-5 ">
           <div className="w-full h-12 flex items-center justify-start p-5 border rounded-md text-md font-semibold bg-slate-50 text-gray-500">
             Filter Products By
           </div>
@@ -161,9 +170,9 @@ console.log(data)
           </div>
         </div>
 
-        <div className="w-full bg-slate-300 flex flex-col">
-          <div className="flex items-center justify-between">
-            <div className="flex p-2 text-3xl gap-5">
+        <div className="w-full bg-slate-00 flex flex-col">
+          <div className="flex items-center justify-between stiky overflow-y-auto top-5 bg-slate-50 rounded-md border px-4 z-40">
+            <div className="flex p-2 text-2xl gap-5">
               <div
                 id="grid"
                 onClick={() => grid_or_list_view(grid)}
@@ -200,7 +209,7 @@ console.log(data)
             </div>
           </div>
           <div>
-            <ProductContainer data={data} />
+            <ProductContainer data={data} grid={gridORlist} />
           </div>
         </div>
       </div>

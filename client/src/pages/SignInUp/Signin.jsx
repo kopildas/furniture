@@ -28,13 +28,14 @@ export default function Signin() {
     email: "",
     password: "",
     confpassword: "",
+    picture : null
   });
 
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   //   const [{}, dispatch] = useStateValue();
 
-  const { name, lastname, email, password, confpassword } = formData;
+  const { name, lastname, email, password, confpassword,picture } = formData;
   console.log(formData);
   const handleInputChange = (e) => {
     setFormData((prevState) => ({

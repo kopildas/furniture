@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { BsCartPlusFill } from "react-icons/bs";
@@ -7,14 +7,15 @@ import { GrFormView } from "react-icons/gr";
 import { IoEyeSharp } from "react-icons/io5";
 import ViewProduct from "./ViewProduct";
 
-export default function ProductContainer({ data }) {
+export default function ProductContainer({ data,grid="grid" }) {
   const rowContainer = useRef();
   const [flag, setFlag] = useState(false);
   const [view, setView] = useState(false);
   const [specific_data, setSpecific_data] = useState(null);
-  const [gridORlist, setGridORlist] = useState(true);
+  const [gridORlist, setGridORlist] = useState(false);
   const navigate = useNavigate();
 
+  console.log(grid);
 
 
   const stopEventPropagationTry = (event) => {
@@ -31,12 +32,23 @@ export default function ProductContainer({ data }) {
   const handleOnClose = () => {
     setView(!view)
   };
+useEffect(() => {
+  if(grid === "grid"){
+    setGridORlist(true)
+    console.log("grid");
+  }else
+  {
+    setGridORlist(false)
+    console.log("dkfjs");
+  }
+
+}, [grid])
 
 
 
 
   return (
-    <div className="text-gray-900">
+    <div className="text-gray-900 z-30">
       {/* laptop view */}
       <div
         ref={rowContainer}
@@ -50,7 +62,7 @@ export default function ProductContainer({ data }) {
           data.map((item) => (
             <div
               key={item?.id}
-              onClick={() => navigate(`/singlefood/${item?.id}`)}
+              onClick={() => navigate(`/singleitem/${item?._id}`)}
               className={`${
                 gridORlist
                   ? "w-1/2  md:w-1/4 lg:w-1/4 xl:w-1/5 "
@@ -60,16 +72,16 @@ export default function ProductContainer({ data }) {
               } h-auto bg-gray-50 bl rounded-lg  my-6 backdrop-blur-lg hover:drop-shadow-2xl`}
             >
               {/* <NavLink to={`/singlefood/${item?.id}`}> */}
-              <div className={`${flag ? "flex flex-row" : "flex flex-col"}`}>
+              <div className={`${!gridORlist ? "flex flex-row" : "flex flex-col"}`}>
                 <div className="flex items-center justify-center w-full bg-gray-50 rounded-br-[30px] z-30">
                   <div className="m-4 w-full z-30 hover:z-40">
                     <motion.img
                       whileHover={{ scale: 1.2 }}
                       src={item?.image}
                       alt=""
-                      className={`w-full h-60 ${
+                      className={` h-60 ${
                         flag ? "rounded-lg" : "rounded-md"
-                      }  -mt-7 drop-shadow-2xl `}
+                      }  -mt-7 drop-shadow-2xl ${gridORlist ? "w-full" : "w-64"}` }
                     />
                   </div>
                   {item.offer && (
@@ -82,7 +94,7 @@ export default function ProductContainer({ data }) {
                     </div>
                   )}
                 </div>
-                <div className="w-10 h-10 bg-gray-300 absolute right-0 top-[13rem] z-10"></div>
+                <div className={`w-10 h-10 bg-gray-300 absolute right-0 top-[13rem] z-10 ${gridORlist ? "" : "hidden"}`}></div>
 
                 <div className="bg-gray-300 p-4 rounded-tl-[30px] rounded-b-lg w-full z-10">
                   <div className="flex flex-col items-start justify-between w-full">
@@ -126,7 +138,7 @@ export default function ProductContainer({ data }) {
                       </p>
                     )}
 
-                    <div className="flex flex-col absolute right-2 top-[17rem] ">
+                    <div className={`flex flex-col absolute right-2 ${gridORlist ? "top-[17rem]" : ""} `}>
                       <motion.div
                         whileTap={{ scale: 1.2 }}
                         className="flex items-center justify-center w-12 h-12 text-2xl bg-orange-00  rounded-full cursor-pointer hover:shadow-lg"
