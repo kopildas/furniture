@@ -17,8 +17,7 @@ export default function Review({ item_id }) {
         console.log(response);
         const fetchedReviews = response.data.reviews;
         setReviews(fetchedReviews);
-        toast.success("Review successfully..!")
-console.log(fetchedReviews);
+       
       } catch (err) {
         const responseText = err.response.data;
   

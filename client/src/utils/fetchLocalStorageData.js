@@ -34,3 +34,12 @@ export const fetchtoken = () => {
 
   return token ? token : [];
 };
+
+export const fetchFavorite = () => {
+  const favorite_Items =
+  localStorage.getItem("favorite_Items") !== "undefined"
+    ? JSON.parse(localStorage.getItem("favorite_Items"))
+    : localStorage.clear();
+
+return favorite_Items ? favorite_Items : [];
+};

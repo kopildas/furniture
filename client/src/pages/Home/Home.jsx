@@ -12,6 +12,7 @@ import { actionType } from "../../context/reducer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cata_wise_product from "../../component/Home/Cata_wise_product";
+import InfoDiv_2 from "../../component/Home/InfoDiv_2";
   
 
 
@@ -151,6 +152,10 @@ export default function Home() {
       <section>
         
         <Cata_wise_product/>
+      </section>
+
+      <section className="hidden md:block">
+        <InfoDiv_2/>
       </section>
     </div>
   );

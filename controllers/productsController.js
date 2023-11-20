@@ -133,7 +133,7 @@ const updateOrAddFieldToAllProducts = async (req, res) => {
     // );
     // const updateResult = await ProductsMongoDb.find({offer: {$lt:100}}).toArray();
 
-    const updateResult = await ProductsMongoDb.find({offer: {$not: {$eq:null}}}).toArray();
+    const updateResult = await ProductsMongoDb.updateMany({}, {$set:{"favorite": false}})
 
     if (!updateResult) {
       throw new BadReqError("Failed to update or add the field in all products");

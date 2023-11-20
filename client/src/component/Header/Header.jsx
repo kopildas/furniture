@@ -10,6 +10,8 @@ import {
   FaThList,
   FaUserAlt,
 } from "react-icons/fa";
+import { GiShoppingCart } from "react-icons/gi";
+import { MdFavoriteBorder } from "react-icons/md";
 import { AiOutlineMail, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
 import { BsTelephone, BsTwitter, BsInstagram } from "react-icons/bs";
 import { MdShoppingBasket } from "react-icons/md";
@@ -17,8 +19,13 @@ import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 
 export default function Header() {
-  const [{ product, user, cartItems }, dispatch] = useStateValue();
+  const [{ product, cartShow, user, cartItems, favorite_Items }, dispatch] =
+    useStateValue();
   console.log(user);
+  const favorite_Items_Length = favorite_Items.filter(
+    (f) => f.favorite === true
+  );
+  console.log(favorite_Items_Length);
   const navigate = useNavigate();
   const location = useLocation();
   const [isFurnitureDropdownOpen, setFurnitureDropdownOpen] = useState(false);
@@ -97,14 +104,20 @@ export default function Header() {
       });
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-     
     }
   };
   useEffect(() => {
     if (!user) {
-      navigate('/');
+      navigate("/");
     }
   }, [user]);
+
+  function cartShowing() {
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow,
+    });
+  }
 
   return (
     <header className=" z-50 w-screen bg-white h-20 p-6 px-16">
@@ -215,65 +228,95 @@ export default function Header() {
                   className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent `}
                 ></li>
               </ul>
-              {!user ? (
-                <ul className="flex">
+              <ul className="flex items-center justify-items-end -px-3">
+                <>
                   <li
-                    className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                      pathMatchRoute("/login") &&
-                      "text-black border-b-2 border-b-amber-900 rounded-sm"
-                    }`}
-                    onClick={() => {
-                      navigate("/login");
-                    }}
+                    className="cursor-pointer w-16 h-9 text-3xl flex items-center justify-center text-gray-600 hover:text-gray-500 "
+                    onClick={cartShowing}
                   >
-                    login
-                  </li>
-                  <li
-                    className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                      pathMatchRoute("/signin") &&
-                      "text-black border-b-2 border-b-amber-900 rounded-sm"
-                    }`}
-                    onClick={() => {
-                      navigate("/signin");
-                    }}
-                  >
-                    Signin
-                  </li>
-                </ul>
-              ) : (
-                <ul className="flex">
-                  <li
-                    className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                      pathMatchRoute("/login") &&
-                      "text-black border-b-2 border-b-amber-900 rounded-sm"
-                    }`}
-                    onMouseEnter={() => toggleUserMenu()}
-                    onMouseLeave={() => toggleUserMenu()}
-                  >
-                    User
-                    <div className="relative">
-                      <div
-                        className={`${
-                          istoggleUserMenuOpen ? "block" : "hidden"
-                        } absolute -left-40 mt-4 py-2 w-36 bg-slate-50 rounded-lg shadow-lg`}
-                      >
-                        {/* Dropdown Content */}
-                        {UserItem.map((item, index) => (
-                          <NavLink
-                            key={index}
-                            to={item.path} // Use NavLink to navigate
-                            id={item.name}
-                            onClick={userClick}
-                            className="block px-4 py-2 text-gray-700 hover:text-black hover:bg-slate-100"
-                          >
-                            {item.name}
-                          </NavLink>
-                        ))}
+                    <GiShoppingCart />
+                    {cartItems && cartItems.length > 0 && (
+                      <div className="absolute top-16 right-[265px] w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                        <p className="text-white font-semibold text-xs">
+                          {cartItems.length}
+                        </p>
                       </div>
-                    </div>
+                    )}
                   </li>
-                </ul>
-              )}
+                </>
+                <>
+                  <li className="cursor-pointer w-16 h-9 text-3xl flex items-center justify-center text-gray-600 hover:text-gray-500 ">
+                    <MdFavoriteBorder />
+                    {favorite_Items_Length &&
+                      favorite_Items_Length.length > 0 && (
+                        <div className="absolute top-16 right-[205px] w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                          <p className="text-white font-semibold text-xs">
+                            {favorite_Items_Length.length}
+                          </p>
+                        </div>
+                      )}
+                  </li>
+                </>
+                {!user ? (
+                  <ul className="flex">
+                    <li
+                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                        pathMatchRoute("/login") &&
+                        "text-black border-b-2 border-b-amber-900 rounded-sm"
+                      }`}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      login
+                    </li>
+                    <li
+                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                        pathMatchRoute("/signin") &&
+                        "text-black border-b-2 border-b-amber-900 rounded-sm"
+                      }`}
+                      onClick={() => {
+                        navigate("/signin");
+                      }}
+                    >
+                      Signin
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="flex">
+                    <li
+                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                        pathMatchRoute("/login") &&
+                        "text-black border-b-2 border-b-amber-900 rounded-sm"
+                      }`}
+                      onMouseEnter={() => toggleUserMenu()}
+                      onMouseLeave={() => toggleUserMenu()}
+                    >
+                      User
+                      <div className="relative">
+                        <div
+                          className={`${
+                            istoggleUserMenuOpen ? "block" : "hidden"
+                          } absolute -left-40 mt-4 py-2 w-36 bg-slate-50 rounded-lg shadow-lg`}
+                        >
+                          {/* Dropdown Content */}
+                          {UserItem.map((item, index) => (
+                            <NavLink
+                              key={index}
+                              to={item.path} // Use NavLink to navigate
+                              id={item.name}
+                              onClick={userClick}
+                              className="block px-4 py-2 text-gray-700 hover:text-black hover:bg-slate-100 text-xl"
+                            >
+                              {item.name}
+                            </NavLink>
+                          ))}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                )}
+              </ul>
             </div>
           </div>
         </div>

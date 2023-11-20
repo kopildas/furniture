@@ -6,6 +6,8 @@ export const actionType = {
   SET_CART_SHOW: "SET_CART_SHOW",
   SET_CART_ITEMS: "SET_CART_ITEMS",
 
+  SET_FAVORITE_ITEMS: "SET_FAVORITE_ITEMS",
+
   SET_SHOP_CATEGORY: "SET_SHOP_CATEGORY",
 
   REGISTER_USER_BEGIN: "REGISTER_USER_BEGIN",
@@ -43,6 +45,11 @@ const reducer = (state, action) => {
         ...state,
         shop_category: action.shop_category,
       };
+    case actionType.SET_FAVORITE_ITEMS:
+      return {
+        ...state,
+        favorite_Items: action.favorite_Items,
+      };
 
     case actionType.LOGIN_USER_SUCCESS:
       return {
@@ -63,7 +70,7 @@ const reducer = (state, action) => {
     case actionType.UPDATE_PRODUCTS:
       return {
         ...state,
-        updateProd: action.updateProd,
+        product: action.product,
       };
     case actionType.SET_CART_SHOW:
       return {

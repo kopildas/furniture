@@ -41,7 +41,7 @@ import productsRouter from './routes/productsRoutes.js'
 
 
 // middleware
-notFoundMiddleware
+// app.use(notFoundMiddleware);
 
 
 app.use(express.json())
@@ -49,8 +49,8 @@ app.use(express.json())
 
 app.get('/', async(req,res) => {
   // res.render('./client/src/main.jsx')
-    const getProduct= await Products.find({}).toArray();
-    console.log(getProduct);
+    // const getProduct= await Products.find({}).toArray();
+    // console.log(getProduct);
     res.json({ message: 'Welcome' });
 })
 
