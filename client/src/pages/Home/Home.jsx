@@ -22,7 +22,7 @@ export default function Home() {
 
 
   async function fetchingData() {
-    console.log("holo" +import.meta.env.VITE_LINK);
+    console.log("holo h" +import.meta.env.VITE_LINK);
     if (data) {
       try {
         // setUpdateFeature(!updateFeature);
