@@ -119,7 +119,7 @@ const deleteProduct = async (req, res) => {
 };
 
 const showStatsProduct = async (req, res) => {
-  res.send("show stats");
+  res.send("show stats bioooo");
 };
 
 
