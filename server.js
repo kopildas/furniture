@@ -17,7 +17,7 @@ const app = express()
 
 //cors settings
 
-const allowedOrigins = ['http://localhost:4001', 'http://localhost:5173'];
+const allowedOrigins = ['furniture-seven.vercel.app','http://localhost:4001', 'http://localhost:5173'];
 
 const corsOptions = {
   origin: function (origin, callback) {
