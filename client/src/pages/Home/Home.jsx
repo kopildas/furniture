@@ -35,7 +35,7 @@ export default function Home() {
         const response = await axios.get(
           `${import.meta.env.VITE_LINK}/products`
         );
-        
+        console.log(import.meta.env.VITE_LINK)
         console.log(response.data.product);
         setData(response.data.product);
         // toast.success("Product added succesfully..!");
