@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../img/woodhy-high-resolution-logo-transparent.png";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import SidebarItem from "../Admin_Comp/Sidebar/SidebarItem";
-import {
-  FaBars,
-  FaCommentAlt,
-  FaRegChartBar,
-  FaTh,
-  FaThList,
-  FaUserAlt,
-} from "react-icons/fa";
+import { AiFillFacebook, AiFillYoutube, AiOutlineMail } from "react-icons/ai";
+import { BsInstagram, BsTelephone, BsTwitter } from "react-icons/bs";
+import { FaBars, FaTh, FaUserAlt } from "react-icons/fa";
 import { GiShoppingCart } from "react-icons/gi";
-import { MdFavoriteBorder } from "react-icons/md";
-import { AiOutlineMail, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
-import { BsTelephone, BsTwitter, BsInstagram } from "react-icons/bs";
-import { MdShoppingBasket } from "react-icons/md";
+import { MdFavoriteBorder, MdShoppingBasket } from "react-icons/md";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
+import logo from "../../img/woodhy-high-resolution-logo-transparent.png";
 
 export default function Header() {
   const [{ product, cartShow, user, cartItems, favorite_Items }, dispatch] =
@@ -120,7 +111,7 @@ export default function Header() {
   }
 
   return (
-    <header className=" z-50 w-screen bg-white h-20 p-6 px-16">
+    <header className=" z-50 w-screen bg-white md:h-20 md:p-6 md:px-16">
       {/* Desktop and Tablets */}
       <nav>
         <div className="hidden md:flex flex-col w-full h-full item-center justify-between">
@@ -237,7 +228,7 @@ export default function Header() {
                   >
                     <GiShoppingCart />
                     {cartItems && cartItems.length > 0 && (
-                      <div className="absolute top-16 right-[265px] w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                      <div className="absolute top-16 w-5 h-5 bg-red-500 right- rounded-full flex items-center justify-center">
                         <p className="text-white font-semibold text-xs">
                           {cartItems.length}
                         </p>
@@ -250,7 +241,9 @@ export default function Header() {
                     <MdFavoriteBorder />
                     {favorite_Items_Length &&
                       favorite_Items_Length.length > 0 && (
-                        <div className="absolute top-16 right-[205px] w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                        <div
+                          className={`absolute top-16 w-5 h-5 bg-red-500 right- rounded-full flex items-center justify-center`}
+                        >
                           <p className="text-white font-semibold text-xs">
                             {favorite_Items_Length.length}
                           </p>
@@ -322,11 +315,8 @@ export default function Header() {
           </div>
         </div>
 
-
-
-
         {/* Mobile */}
-        <div className="md:hidden flex justify-between items-center max-w-6xl mx-auto">
+        <div className="md:hidden flex items-start justify-between p-5">
           <FaBars
             onClick={() => setIsOpen(!isOpen)}
             className="text-3xl text-gray-500 cursor-pointer"
@@ -358,135 +348,133 @@ export default function Header() {
         {isOpen && (
           <div className="md:hidden w-screen web text-white">
             <ul className="web  item-start">
-                <li
-                  className={`cursor-pointer py-3 w- h-14 text-xl flex items-start justify-start pl-4 text-gray-600  hover:text-gray-900 hover:bg-slate-100  ${
-                    pathMatchRoute("/") &&
-                    "text-black border-b-2 border-b-amber-900  rounded-sm"
-                  }`}
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                >
-                  Home
-                </li>
-                <li
-                  className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
-                    pathMatchRoute("/about") &&
-                    "text-black border-b-2 border-b-amber-900 rounded-sm"
-                  }`}
-                  onClick={() => {
-                    navigate("/about");
-                  }}
-                >
-                  About
-                </li>
-                <li
-                  className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
-                    pathMatchRoute("/projects") &&
-                    "text-black border-b-2 border-b-amber-900 rounded-sm"
-                  }`}
-                  onMouseEnter={() => toggleFurnitureDropdown()}
-                  onMouseLeave={() => toggleFurnitureDropdown()}
-                >
-                  Furniture
-                  <div className="relative">
-                    <div
-                      className={`${
-                        isFurnitureDropdownOpen ? "block" : "hidden"
-                      } absolute -left-10 top-1 mt-4 py-2 w-96 bg-slate-900 rounded-lg shadow-lg`}
-                    >
-                      {/* Dropdown Content */}
-                      {DropmenuItem.map((item, index) => (
-                        <NavLink
-                          key={index}
-                          to={item.path} // Use NavLink to navigate
-                          id={item.name}
-                          onClick={shop_route}
-                          className="block px-4 py-2 text-gray-400 hover:text-black hover:bg-slate-100"
-                        >
-                          {item.name}
-                        </NavLink>
-                      ))}
-                    </div>
+              <li
+                className={`cursor-pointer py-3 w- h-14 text-xl flex items-start justify-start pl-4 text-gray-600  hover:text-gray-900 hover:bg-slate-100  ${
+                  pathMatchRoute("/") &&
+                  "text-black border-b-2 border-b-amber-900  rounded-sm"
+                }`}
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Home
+              </li>
+              <li
+                className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
+                  pathMatchRoute("/about") &&
+                  "text-black border-b-2 border-b-amber-900 rounded-sm"
+                }`}
+                onClick={() => {
+                  navigate("/about");
+                }}
+              >
+                About
+              </li>
+              <li
+                className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
+                  pathMatchRoute("/projects") &&
+                  "text-black border-b-2 border-b-amber-900 rounded-sm"
+                }`}
+                onMouseEnter={() => toggleFurnitureDropdown()}
+                onMouseLeave={() => toggleFurnitureDropdown()}
+              >
+                Furniture
+                <div className="relative">
+                  <div
+                    className={`${
+                      isFurnitureDropdownOpen ? "block" : "hidden"
+                    } absolute -left-10 top-1 mt-4 py-2 w-96 bg-slate-900 rounded-lg shadow-lg`}
+                  >
+                    {/* Dropdown Content */}
+                    {DropmenuItem.map((item, index) => (
+                      <NavLink
+                        key={index}
+                        to={item.path} // Use NavLink to navigate
+                        id={item.name}
+                        onClick={shop_route}
+                        className="block px-4 py-2 text-gray-400 hover:text-black hover:bg-slate-100"
+                      >
+                        {item.name}
+                      </NavLink>
+                    ))}
                   </div>
-                </li>
-                <li
-                  className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
-                    pathMatchRoute("/projects") &&
-                    "text-black border-b-2 border-b-amber-900 rounded-sm"
-                  }`}
-                  onClick={() => {
-                    navigate("/projects");
-                  }}
-                >
-                  Showroom
-                </li>
+                </div>
+              </li>
+              <li
+                className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
+                  pathMatchRoute("/projects") &&
+                  "text-black border-b-2 border-b-amber-900 rounded-sm"
+                }`}
+                onClick={() => {
+                  navigate("/projects");
+                }}
+              >
+                Showroom
+              </li>
 
-                <li
-                  className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent `}
-                ></li>
-            
+              <li
+                className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent `}
+              ></li>
 
-            {!user ? (
-                  <ul className="flex">
-                    <li
-                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                        pathMatchRoute("/login") &&
-                        "text-black border-b-2 border-b-amber-900 rounded-sm"
-                      }`}
-                      onClick={() => {
-                        navigate("/login");
-                      }}
-                    >
-                      login
-                    </li>
-                    <li
-                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                        pathMatchRoute("/signin") &&
-                        "text-black border-b-2 border-b-amber-900 rounded-sm"
-                      }`}
-                      onClick={() => {
-                        navigate("/signin");
-                      }}
-                    >
-                      Signin
-                    </li>
-                  </ul>
-                ) : (
-                  <ul className="flex -mt-7">
-                    <li
-                      className={`cursor-pointer py-3 pl-4 w-full text-xl flex text-gray-600 hover:text-gray-900 hover:bg-slate-100 ${
-                        pathMatchRoute("/login") &&
-                        "text-black border-b-2 border-b-amber-900 rounded-sm"
-                      }`}
-                      onMouseEnter={() => toggleUserMenu()}
-                      onMouseLeave={() => toggleUserMenu()}
-                    >
-                      User
-                      <div className="relative">
-                        <div
-                          className={`${
-                            istoggleUserMenuOpen ? "block" : "hidden"
-                          } absolute  -left-2  mt-6 py-2 w-96 bg-slate-900 rounded-lg shadow-lg`}
-                        >
-                          {/* Dropdown Content */}
-                          {UserItem.map((item, index) => (
-                            <NavLink
-                              key={index}
-                              to={item.path} // Use NavLink to navigate
-                              id={item.name}
-                              onClick={userClick}
-                              className="block px-4 py-2 text-gray-300 hover:text-black hover:bg-slate-100 text-xl"
-                            >
-                              {item.name}
-                            </NavLink>
-                          ))}
-                        </div>
+              {!user ? (
+                <ul className="flex">
+                  <li
+                    className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                      pathMatchRoute("/login") &&
+                      "text-black border-b-2 border-b-amber-900 rounded-sm"
+                    }`}
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    login
+                  </li>
+                  <li
+                    className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                      pathMatchRoute("/signin") &&
+                      "text-black border-b-2 border-b-amber-900 rounded-sm"
+                    }`}
+                    onClick={() => {
+                      navigate("/signin");
+                    }}
+                  >
+                    Signin
+                  </li>
+                </ul>
+              ) : (
+                <ul className="flex -mt-7">
+                  <li
+                    className={`cursor-pointer py-3 pl-4 w-full text-xl flex text-gray-600 hover:text-gray-900 hover:bg-slate-100 ${
+                      pathMatchRoute("/login") &&
+                      "text-black border-b-2 border-b-amber-900 rounded-sm"
+                    }`}
+                    onMouseEnter={() => toggleUserMenu()}
+                    onMouseLeave={() => toggleUserMenu()}
+                  >
+                    User
+                    <div className="relative">
+                      <div
+                        className={`${
+                          istoggleUserMenuOpen ? "block" : "hidden"
+                        } absolute  -left-2  mt-6 py-2 w-96 bg-slate-900 rounded-lg shadow-lg`}
+                      >
+                        {/* Dropdown Content */}
+                        {UserItem.map((item, index) => (
+                          <NavLink
+                            key={index}
+                            to={item.path} // Use NavLink to navigate
+                            id={item.name}
+                            onClick={userClick}
+                            className="block px-4 py-2 text-gray-300 hover:text-black hover:bg-slate-100 text-xl"
+                          >
+                            {item.name}
+                          </NavLink>
+                        ))}
                       </div>
-                    </li>
-                  </ul>
-                )}
-            
+                    </div>
+                  </li>
+                </ul>
+              )}
             </ul>
           </div>
         )}

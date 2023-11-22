@@ -29,6 +29,8 @@ export default function SingleItem() {
   useEffect(() => {
     const foundItem = product.find((item) => item._id === id);
     //   selectedFoodRef.current = foundItem;
+    console.log(product)
+    console.log(foundItem);
     setSingleData(foundItem);
   }, []);
 
@@ -84,10 +86,10 @@ export default function SingleItem() {
 
   return (
     <div className="text-gray-800">
-      <div className="flex mt-16 p-20 w-full text-gray-900 gap-64">
-        <div className="flex bg-green-60 gap-4 w-3/12">
+      <div className="flex md:flex-row flex-col mt-16 md:p-20 w-full text-gray-900 gap-64">
+        <div className="flex bg-green-60 gap-4 md:w-3/12">
           {/* gallary image */}
-          <div className="flex flex-col gap-4">
+          <div className="hidden md:flex flex-col gap-4">
             <div>
               {!singleData.gal_1_imgURL && (
                 <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
@@ -151,7 +153,7 @@ export default function SingleItem() {
           </div>
 
           <div>
-            <div className="bg-slate-100 w-96 h-[450px] rounded-md flex items-center justify-center border border-gray-300 p-3">
+            <div className="bg-slate-100 w-full md:w-96 md:h-[450px] rounded-md flex items-center justify-center border border-gray-300 p-3">
               <div
                 id={"image"}
                 className="bg-slate-200 w-full h-full rounded-lg "
@@ -172,7 +174,7 @@ export default function SingleItem() {
           </div>
         </div>
 
-        <div className=" flex flex-col mt-5  gap-10 bg-green-0">
+        <div className=" flex flex-col -mt-64 md:mt-5 p-5 gap-10 bg-green-0">
             <div>
               <p className="text-4xl font-semibold">{singleData.item_name}</p>
               <p className="font-semibold">Ratings</p>
@@ -207,7 +209,7 @@ export default function SingleItem() {
       </div>
 
       {/* review and descriptions */}
-      <div className="flex flex-col gap-5  p-32 -mt-28 h-[100%]">
+      <div className="flex flex-col gap-5 p-5 mt-5 md:p-32 md:-mt-28 h-[100%]">
         <div className="flex flex-row gap-6">
           <p
             className={`font-semibold text-xl border-b-2 ${
@@ -240,7 +242,7 @@ export default function SingleItem() {
       <div
         className={`${
           user ? "flex" : "hidden"
-        } flex-col gap-5 pr-32 pl-32 pb-32 h-[100%]`}
+        } flex-col gap-5 p-5 mb-10 md:pr-32 md:pl-32 md:pb-32 h-[100%]`}
       >
         <p className="font-bold text-2xl">Leave a Review</p>
         <ReactStar size={50} onChange={ratingChanged} />

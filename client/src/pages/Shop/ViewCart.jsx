@@ -19,7 +19,7 @@ export default function ViewCart() {
 let table = true;
 
   return (
-    <div className="text-black mt-6 p-20 w-full ">
+    <div className="text-black mt-6 md:p-20 p-5 w-full ">
       <div className="w-full flex md:flex-row flex-col gap-2">
         <div className="w-full md:w-4/6 bg-fuchsia-00 overflow-x-auto">
           <table className="min-w-full mt-5">
@@ -102,7 +102,7 @@ let table = true;
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full h-20 text-3xl md:text-lg md:h-10 rounded-full bg-orange-500 text-gray-50  hover:shadow-lg "
+                className="md:w-full p-5 mt-42 text-3xl md:text-lg md:h-10 rounded-full bg-orange-500 text-gray-50  hover:shadow-lg "
               >
                 Check Out
               </motion.button>

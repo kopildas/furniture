@@ -83,9 +83,9 @@ export default function CartContainer() {
           </div>
 
           {/* cart total section */}
-          <div className="w-full flex-1 bg-gray-400 mt-32 md:-mt-8 rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
+          <div className="w-full flex-1 bg-gray-400 -mt-16 md:-mt-8 rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
             <div className="bg-gray-00  backdrop-blur-2xl p-5 md:p-2 md:mt-5 rounded-lg w-full text-gray-900">
-              <div className="flex flex-col items-center justify-center gap-5 text-2xl md:gap-1 md:text-base">
+              <div className="flex mt-4 flex-col items-center justify-center gap-5 text-2xl md:gap-1 md:text-base">
                 <div className="w-full flex items-center justify-between">
                   <p className="">Sub Total</p>
                   <p className="font-semibold">$ {total}</p>
@@ -105,11 +105,11 @@ export default function CartContainer() {
                 </div>
               </div>
             </div>
-            {user ? (
+            {!user ? (
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full h-20 text-3xl md:text-lg md:h-10 rounded-full bg-orange-500 text-gray-50  hover:shadow-lg "
+                className="w-full h-10 text-2xl md:text-lg md:h-10 rounded-full bg-orange-500 text-gray-50  hover:shadow-lg "
               >
                 Check Out
               </motion.button>
@@ -118,7 +118,7 @@ export default function CartContainer() {
                 <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full h-20 text-3xl md:text-lg md:h-10 rounded-full bg-orange-900 text-gray-50 my-2 hover:shadow-lg "
+                className="w-full h-10 text-2xl md:text-lg md:h-10 rounded-full bg-orange-900 text-gray-50 my-2 hover:shadow-lg "
                 onClick={() => {
                   navigate("/viewcart");
                 }}
@@ -128,7 +128,7 @@ export default function CartContainer() {
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-64 text-3xl md:text-lg md:h-10 rounded-full bg-amber-900 text-gray-50 my-2 hover:shadow-lg "
+                className="w-full text-2xl md:text-lg md:h-10 rounded-full bg-amber-900 text-gray-50 my-2 hover:shadow-lg "
               >
                 Check Out
               </motion.button>

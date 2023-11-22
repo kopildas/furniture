@@ -134,13 +134,13 @@ console.log(data)
         <p className="text-xl font-semibold text-gray-800">`Home : Shop`</p>
       </div>
 
-      <div className="m-10 flex gap-5">
-        <div className="w-72 flex flex-col h-screen sticky overflow-y-auto top-5 ">
+      <div className="m-10 flex flex-col md:flex-row md:gap-5">
+        <div className="w-72 flex flex-col md:h-screen md:sticky overflow-y-auto top-5 ">
           <div className="w-full h-12 flex items-center justify-start p-5 border rounded-md text-md font-semibold bg-slate-50 text-gray-500">
             Filter Products By
           </div>
 
-          <div className="font-semibold bg-slate-50 text-gray-700 p-5 mt-2 flex flex-col gap-5">
+          <div className="hidden md:flex font-semibold bg-slate-50 text-gray-700 p-5 mt-2 flex-col gap-5">
             <p className="">Category</p>
             {CategoryItem.map((item, index) => (
               <div
@@ -170,8 +170,8 @@ console.log(data)
           </div>
         </div>
 
-        <div className="w-full bg-slate-00 flex flex-col">
-          <div className="flex items-center justify-between stiky overflow-y-auto top-5 bg-slate-50 rounded-md border px-4 z-40">
+        <div className="w-full bg-slate-00 mt-5 flex flex-col">
+          <div className="flex flex-col md:flex-row md:items-center gap-5 justify-between overflow-y-auto top-5 bg-slate-50 rounded-md border px-4 z-40">
             <div className="flex p-2 text-2xl gap-5">
               <div
                 id="grid"
