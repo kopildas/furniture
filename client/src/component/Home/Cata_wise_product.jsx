@@ -32,6 +32,7 @@ export default function Cata_wise_product() {
       setDate(response);
     }
   }
+  console.log(activeCategory)
 
   return (
     <div className="flex flex-col">
@@ -53,7 +54,7 @@ export default function Cata_wise_product() {
             <button
               id="new_arrival"
               onClick={sorting_product}
-              className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${
+              className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-00 ${
                 activeCategory === "new_arrival" && "bg-gray-900 text-gray-100"
               } hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
             >
@@ -63,7 +64,7 @@ export default function Cata_wise_product() {
             <button
               id="special_offer"
               onClick={sorting_product}
-              className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${
+              className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-00 ${
                 activeCategory === "special_offer" &&
                 "bg-gray-900 text-gray-100"
               } hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
@@ -74,7 +75,7 @@ export default function Cata_wise_product() {
             <button
               id="best_sellers"
               onClick={sorting_product}
-              className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 ${
+              className={`rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-00 ${
                 activeCategory === "best_sellers" && "bg-gray-900 text-gray-100"
               } hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5`}
             >

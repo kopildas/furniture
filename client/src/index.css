@@ -208,3 +208,13 @@ body{
   display: inline-block;
   width: 1.7em;
 }
+
+
+
+
+/* home */
+.web {
+  background-color: #ffffff05;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(25px);
+}

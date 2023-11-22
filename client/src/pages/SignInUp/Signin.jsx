@@ -86,11 +86,11 @@ export default function Signin() {
 
   return (
     <div
-      className="flex justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
-      style={{ backgroundImage: `url("./pasta.jpg")` }}
+      className="flex mt-16 mb-16 justify-center bg-cover bg-center bg-no-repeat bg-fixed text-gray-700"
+      // style={{ backgroundImage: `url("./pasta.jpg")` }}
     >
-      <div className="w-full max-w-sm bg-white rounded-lg p-6 grid">
-        <h2 className="text-2xl text-center mb-6">Login</h2>
+      <div className="w-full max-w-sm rounded-lg p-6 grid">
+        <h2 className="text-2xl text-center font-semibold mb-2">Register</h2>
         <form onSubmit={handleSignup} className="bg-slate-200 p-5 rounded-md">
           <label className="mb-4">
             name:
@@ -134,12 +134,12 @@ export default function Signin() {
               />
               {showPassword ? (
                 <AiFillEyeInvisible
-                  className="absolute top-11 transform -translate-y-1/2 right-3 text-xl cursor-pointer"
+                  className="absolute top-9 transform -translate-y-1/2 right-3 text-xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               ) : (
                 <AiFillEye
-                  className="absolute transform -translate-y-1/2 right-3 top-11 text-xl cursor-pointer"
+                  className="absolute transform -translate-y-1/2 right-3 top-9 text-xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               )}
@@ -158,27 +158,27 @@ export default function Signin() {
               />
               {showPassword ? (
                 <AiFillEyeInvisible
-                  className="absolute top-11 transform -translate-y-1/2 right-3 text-xl cursor-pointer"
+                  className="absolute top-9 transform -translate-y-1/2 right-3 text-xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               ) : (
                 <AiFillEye
-                  className="absolute transform -translate-y-1/2 right-3 top-11 text-xl cursor-pointer"
+                  className="absolute transform -translate-y-1/2 right-3 top-9 text-xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               )}
             </label>
           </div>
 
-          <div className="flex justify-between mb-4">
+          <div className="flex  flex-col justify-between mb-4">
             <p>
               Already have an account?
-              <button
-                className="text-blue-500 hover:text-blue-700 transition duration-200 ease-in-out ml-1"
-                onClick={togglePop}
+              <Link
+                to="/login"
+                className="text-blue-500 hover:text-blue-700 transit ion duration-200 ease-in-out ml-1"
               >
-                Login
-              </button>
+              Login
+              </Link>
               {/* {seen && <Login toggle={togglePop} />} */}
             </p>
             <p>
@@ -186,7 +186,7 @@ export default function Signin() {
                 to="/forgot-password"
                 className="text-blue-500 hover:text-blue-700 transit ion duration-200 ease-in-out ml-1"
               >
-                Forgot Password
+              Forgot Password
               </Link>
             </p>
           </div>

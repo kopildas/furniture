@@ -33,6 +33,8 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     // Code to handle login goes here
+    console.log("login")
+    console.log(formData);
     try {
       const response = await axios.post(
         `${link}/api/v1/auth/login`,
@@ -70,7 +72,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="mt-32 flex flex-col items-center justify-center">
+      <div className="mt-16 mb-28 flex flex-col items-center justify-center text-gray-700">
         <h2 className="text-2xl text-center mb-6">Login..</h2>
         <form onSubmit={handleLogin} className="bg-slate-200 rounded-lg p-5">
           <div className="mb-4">
@@ -104,11 +106,11 @@ export default function Login() {
               />
             )}
           </div>
-          <div className="flex justify-between mb-4">
+          <div className="flex flex-col justify-between mb-4">
             <p>
               Don't have an account?{" "}
               <Link
-                to="/sign-up"
+                to="/signin"
                 // onClick={toggle}
                 className="text-blue-500 hover:text-blue-700 transition duration-200 ease-in-out ml-1"
               >

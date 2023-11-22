@@ -20,40 +20,44 @@ export default function Home() {
   const [data, setData] = useState({ message: '' });
   const [{ product, user,updateProd }, dispatch] = useStateValue();
 
+console.log(data)
+console.log(product)
 
-  async function fetchingData() {
-    console.log("holo h" +import.meta.env.VITE_LINK);
-    if (data) {
-      try {
-        // setUpdateFeature(!updateFeature);
-        dispatch({
-          type: actionType.UPDATE_PRODUCTS,
-          updateProd: false,
-        });
-        console.log("jhda")
+async function fetchingData() {
+  console.log("holo h" + import.meta.env.VITE_LINK);
+  if (data) {
+    try {
+      dispatch({
+        type: actionType.UPDATE_PRODUCTS,
+        updateProd: false,
+      });
 
-        const response = await axios.get(
-          `${import.meta.env.VITE_LINK}/products`
-        );
-        
-        console.log(response.data.product);
-        setData(response.data.product);
-        // toast.success("Product added succesfully..!");
-        dispatch({
-          type: actionType.SET_PRODUCTS,
-          product: response.data.product,
-        });
-        localStorage.removeItem("product");
-        localStorage.setItem("product", JSON.stringify(response.data.product));
-      } catch (err) {
-        const responseText = err.response.data;
+      // Use await here to wait for the response
+      const response = await axios.get(
+        `${import.meta.env.VITE_LINK}/products`
+      );
 
-        console.log(responseText);
-        toast.error(responseText.msg);
-        console.log(err);
-      }
+      console.log("respons" + response.data.product);
+
+      setData(response.data.product);
+
+      dispatch({
+        type: actionType.SET_PRODUCTS,
+        product: response.data.product,
+      });
+
+      localStorage.removeItem("product");
+      localStorage.setItem("product", JSON.stringify(response.data.product));
+    } catch (err) {
+      const responseText = err.response.data;
+
+      console.log(responseText);
+      toast.error(responseText.msg);
+      console.log(err);
     }
   }
+}
+
 
 
 

@@ -17,7 +17,7 @@ const app = express()
 
 //cors settings
 
-const allowedOrigins = ['https://woodhy-backend.onrender.com','http://localhost:4001', 'https://woodhy.vercel.app'];
+const allowedOrigins = ['https://woodhy-backend.onrender.com','http://localhost:4001', 'https://woodhy.vercel.app','http://localhost:5173'];
 
 const corsOptions = {
   origin: function (origin, callback) {

@@ -48,7 +48,7 @@ const createProduct = async (req, res) => {
 const getAllProduct = async (req, res) => {
   const product = await Products.find();
   const reversedProducts = product.reverse(); // Reverse the order of products
-
+console.log("reversedProducts")
   res.status(StatusCodes.OK).json({ product: reversedProducts });
 };
 
