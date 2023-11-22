@@ -228,6 +228,7 @@ export default function Header() {
                   className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent `}
                 ></li>
               </ul>
+
               <ul className="flex items-center justify-items-end -px-3">
                 <>
                   <li
@@ -321,16 +322,19 @@ export default function Header() {
           </div>
         </div>
 
+
+
+
         {/* Mobile */}
-        <div className="md:hidden flex justify-between items-center px-3 max-w-6xl mx-auto">
+        <div className="md:hidden flex justify-between items-center max-w-6xl mx-auto">
           <FaBars
             onClick={() => setIsOpen(!isOpen)}
             className="text-3xl text-gray-500 cursor-pointer"
           />
           <img
-            src="./logo.png"
+            src={logo}
             alt="logo"
-            className="h-16 cursor-pointer"
+            className="h-8 w- cursor-pointer"
             onClick={() => {
               navigate("/");
               // adminOrNot();
@@ -338,7 +342,7 @@ export default function Header() {
           />
           <div
             className="relative flex items-center justify-center gap-9"
-            // onClick={cartShowing}
+            onClick={cartShowing}
           >
             <MdShoppingBasket className="md:text-2xl text-4xl text-gray-500 cursor-pointer" />
             {cartItems && cartItems.length > 0 && (
@@ -352,34 +356,137 @@ export default function Header() {
         </div>
 
         {isOpen && (
-          <div className="md:hidden w-screen bg-black text-white">
-            <ul className="text-center">
-              {DropmenuItem.map((item) => (
+          <div className="md:hidden w-screen web text-white">
+            <ul className="web  item-start">
                 <li
-                  key={item.path}
-                  className={`cursor-pointer py-3 text-sm font-semibold border-b ${
-                    pathMatchRoute(item.path) && "text-red-500"
+                  className={`cursor-pointer py-3 w- h-14 text-xl flex items-start justify-start pl-4 text-gray-600  hover:text-gray-900 hover:bg-slate-100  ${
+                    pathMatchRoute("/") &&
+                    "text-black border-b-2 border-b-amber-900  rounded-sm"
                   }`}
                   onClick={() => {
-                    navigate(item.path);
-                    setIsOpen(false);
+                    navigate("/");
                   }}
                 >
-                  {item.icon} {item.name}
+                  Home
                 </li>
-              ))}
-              <li
-                className={`cursor-pointer py-3 text-sm font-semibold border-b ${
-                  (pathMatchRoute("/sign-in") || pathMatchRoute("/profile")) &&
-                  "text-red-500"
-                }`}
-                onClick={() => {
-                  // togglePopup("login");
-                  setIsOpen(false);
-                }}
-              >
-                {/* {pagestate} */} hfgt
-              </li>
+                <li
+                  className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
+                    pathMatchRoute("/about") &&
+                    "text-black border-b-2 border-b-amber-900 rounded-sm"
+                  }`}
+                  onClick={() => {
+                    navigate("/about");
+                  }}
+                >
+                  About
+                </li>
+                <li
+                  className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
+                    pathMatchRoute("/projects") &&
+                    "text-black border-b-2 border-b-amber-900 rounded-sm"
+                  }`}
+                  onMouseEnter={() => toggleFurnitureDropdown()}
+                  onMouseLeave={() => toggleFurnitureDropdown()}
+                >
+                  Furniture
+                  <div className="relative">
+                    <div
+                      className={`${
+                        isFurnitureDropdownOpen ? "block" : "hidden"
+                      } absolute -left-10 top-1 mt-4 py-2 w-96 bg-slate-900 rounded-lg shadow-lg`}
+                    >
+                      {/* Dropdown Content */}
+                      {DropmenuItem.map((item, index) => (
+                        <NavLink
+                          key={index}
+                          to={item.path} // Use NavLink to navigate
+                          id={item.name}
+                          onClick={shop_route}
+                          className="block px-4 py-2 text-gray-400 hover:text-black hover:bg-slate-100"
+                        >
+                          {item.name}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </div>
+                </li>
+                <li
+                  className={`cursor-pointer py-3 w h-14 text-xl flex items-start justify-start pl-4 text-gray-600 hover:text-gray-900 hover:bg-slate-100  ${
+                    pathMatchRoute("/projects") &&
+                    "text-black border-b-2 border-b-amber-900 rounded-sm"
+                  }`}
+                  onClick={() => {
+                    navigate("/projects");
+                  }}
+                >
+                  Showroom
+                </li>
+
+                <li
+                  className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent `}
+                ></li>
+            
+
+            {!user ? (
+                  <ul className="flex">
+                    <li
+                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                        pathMatchRoute("/login") &&
+                        "text-black border-b-2 border-b-amber-900 rounded-sm"
+                      }`}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      login
+                    </li>
+                    <li
+                      className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
+                        pathMatchRoute("/signin") &&
+                        "text-black border-b-2 border-b-amber-900 rounded-sm"
+                      }`}
+                      onClick={() => {
+                        navigate("/signin");
+                      }}
+                    >
+                      Signin
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="flex -mt-7">
+                    <li
+                      className={`cursor-pointer py-3 pl-4 w-full text-xl flex text-gray-600 hover:text-gray-900 hover:bg-slate-100 ${
+                        pathMatchRoute("/login") &&
+                        "text-black border-b-2 border-b-amber-900 rounded-sm"
+                      }`}
+                      onMouseEnter={() => toggleUserMenu()}
+                      onMouseLeave={() => toggleUserMenu()}
+                    >
+                      User
+                      <div className="relative">
+                        <div
+                          className={`${
+                            istoggleUserMenuOpen ? "block" : "hidden"
+                          } absolute  -left-2  mt-6 py-2 w-96 bg-slate-900 rounded-lg shadow-lg`}
+                        >
+                          {/* Dropdown Content */}
+                          {UserItem.map((item, index) => (
+                            <NavLink
+                              key={index}
+                              to={item.path} // Use NavLink to navigate
+                              id={item.name}
+                              onClick={userClick}
+                              className="block px-4 py-2 text-gray-300 hover:text-black hover:bg-slate-100 text-xl"
+                            >
+                              {item.name}
+                            </NavLink>
+                          ))}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                )}
+            
             </ul>
           </div>
         )}

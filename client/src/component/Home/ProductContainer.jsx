@@ -359,7 +359,7 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
       {/* laptop view */}
       <div
         ref={rowContainer}
-        className={`w-full hidden md:flex  items-center my-10 p-5 gap-6 md:gap-7 p-1 scroll-smooth ${
+        className={`w-full hidden md:flex  items-center my-10 gap-6 md:gap-7 p-1 scroll-smooth ${
           flag
             ? "overflow-x-scroll scrollbar-none scroll-auto"
             : "overflow-x-hidden flex flex-wrap justify-center"
@@ -516,8 +516,12 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
         ) : null}
       </div>
 
+
+
+
+
       {/* mobile view */}
-      {/* <div
+      <div
       ref={rowContainer}
       className={`w-full flex md:hidden  items-center my-16 gap-6 md:gap-7  scroll-smooth ${
         flag
@@ -529,7 +533,7 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
         data.map((item) => (
           <div
             key={item?.id}
-            onClick={() => navigate(`/singlefood/${item?.id}`)}
+            onClick={() => navigate(`/singlefood/${item?._id}`)}
             className={`${
               gridORlist
                 ? "w-40  md:w-1/3 lg:w-1/4 xl:w-1/5 "
@@ -538,17 +542,29 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
               flag ? "min-w-[200px]" : "min-w-[120px]"
             }  h-auto bg-gray-100 bl rounded-lg p-4 my-7 backdrop-blur-lg hover:drop-shadow-2xl`}
           >
-            <NavLink to={`/singlefood/${item?.id}`}>
-            <div className="flex items-center justify-center w-full">
+            {/* <NavLink to={`/singlefood/${item?.id}`}> */}
+            <div className="flex items-center justify-center w-full bg-gray-50 rounded-br-[30px] z-30">
+            <div className="flex items-center justify-center z-30 hover:z-40 w-full">
               <motion.img
                 whileHover={{ scale: 1.2 }}
-                src={item?.images}
+                src={item?.image}
                 alt=""
                 className={`w-full ${
                   gridORlist ? "h-32" : "h-full"
                 } rounded-xl  -mt-8 drop-shadow-2xl`}
               />
             </div>
+            {item.offer && (
+                    <div>
+                      <div className="w-14 h-6 bg-red-500 absolute top-4 left-2 z-30 rounded-e-md flex items-center justify-center">
+                        <p>{item.offer}</p>
+                      </div>
+                      <div className="w-14 h-6 bg-red-400 absolute top-[24px] left-0 z-10"></div>
+                      <div className="w-14 h-10 bg-red-200 absolute top-[25px] left-[14px] rotate-45 z-10"></div>
+                    </div>
+                  )}
+            </div>
+
             <div className="flex flex-col items-start justify-between w-full">
               <p className="text-base font-semibold text-textColor md:text-lg">
                 ratings
@@ -576,10 +592,10 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
                 )}
               </motion.div>
             </div>
-            </NavLink>
+            {/* </NavLink> */}
           </div>
         ))}
-    </div> */}
+    </div>
     </div>
   );
 }

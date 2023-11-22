@@ -67,8 +67,8 @@ export default function CartContainer() {
       {cartItems && cartItems.length > 0 ? (
         
         <div className="w-full h-full mt-10 md:mt-1 bg-slate-300 rounded-tl-[2rem] flex flex-col">
-          <div className="w-10 h-10 bg-black top-7 rounded-br-[2rem] absolute right-0 z-20"></div>
-          <div className="w-10 h-10 bg-slate-300 top-7 absolute right-0"></div>
+          <div className="w-10 h-10 bg-black top-[96px] md:top-7 rounded-br-[2rem] absolute right-0 z-20"></div>
+          <div className="w-9 h-10 bg-slate-300 top-[96px] md:top-7 absolute right-0"></div>
           {/* cart section */}
           <div className="w-full h-96 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll no-scrollbar">
             {/* cart items */}
