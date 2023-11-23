@@ -316,7 +316,7 @@ export default function Header() {
         </div>
 
         {/* Mobile */}
-        <div className="md:hidden flex items-start justify-between p-5">
+        <div className="md:hidden flex items-start justify-between p-5 max-w-6xl mx-auto">
           <FaBars
             onClick={() => setIsOpen(!isOpen)}
             className="text-3xl text-gray-500 cursor-pointer"

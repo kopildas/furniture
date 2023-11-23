@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "../../context/StateProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,31 +8,32 @@ export default function Cata_wise_product() {
   const [{ product, user }, dispatch] = useStateValue();
 
   // const new_arrival_Products = product.slice(0, 8);
-  // const [data,setDate] = useState(new_arrival_Products)
-  const [data, setDate] = useState(product ? product.slice(0, 8) : []);
+  // const [data,setData] = useState(new_arrival_Products)
+  const [data, setData] = useState(product ? product.slice(0, 8) : []);
   const [activeCategory, setActiveCategory] = useState("new_arrival");
 
   const updateDATA = () => {
-    setDate(product ? product.slice(0, 8) : []);
+    setData(product ? product.slice(0, 8) : []);
   };
 
-  console.log(data);
-  console.log(product);
+  useEffect(() => {
+    updateDATA()
+  }, [product])
+  
+
+
 
   function sorting_product(e) {
     setActiveCategory(e.target.id);
     if (e.target.id === "new_arrival") {
       const firstEightProducts = product.slice(0, 8);
-      console.log(firstEightProducts);
-      setDate(firstEightProducts);
+      setData(firstEightProducts);
     } else if (e.target.id === "special_offer") {
       const response = product.filter((f) => f.offer != null);
 
-      console.log(response);
-      setDate(response);
+      setData(response);
     }
   }
-  console.log(activeCategory)
 
   return (
     <div className="flex flex-col">

@@ -536,31 +536,46 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
             onClick={() => navigate(`/singlefood/${item?._id}`)}
             className={`${
               gridORlist
-                ? "w-40  md:w-1/3 lg:w-1/4 xl:w-1/5 "
+                ? "w-32  md:w-1/3 lg:w-1/4 xl:w-1/5 "
                 : "flex-col w-96"
             } ${
-              flag ? "min-w-[200px]" : "min-w-[120px]"
-            }  h-auto bg-gray-100 bl rounded-lg p-4 my-7 backdrop-blur-lg hover:drop-shadow-2xl`}
+              flag ? "min-w-[150px]" : "min-w-[100px]"
+            }  h-auto bg-gray-100 bl rounded-lg p-1 my-7 backdrop-blur-lg hover:drop-shadow-2xl`}
           >
             {/* <NavLink to={`/singlefood/${item?.id}`}> */}
             <div className="flex items-center justify-center w-full bg-gray-50 rounded-br-[30px] z-30">
-            <div className="flex items-center justify-center z-30 hover:z-40 w-full">
+            <div className="flex items-center justify-center z-30 w-full">
               <motion.img
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ }}
                 src={item?.image}
                 alt=""
                 className={`w-full ${
                   gridORlist ? "h-32" : "h-full"
                 } rounded-xl  -mt-8 drop-shadow-2xl`}
               />
+              <motion.div
+                        whileTap={{ scale: 1.2 }}
+                        className="flex items-center justify-center absolute -top-10 right-0 w-14 h-14 text-3xl bg-orange-00  rounded-full cursor-pointer hover:shadow-lg"
+                        onClick={(e) => {
+                          stopEventPropagationTry(e); // Prevent event from propagating
+                          addtoFavorite(item);
+                        }}
+                      >
+                        {item?.favorite === true ? (
+                          <MdFavorite className="" />
+                        ) : (
+                          <AiOutlineHeart className="" /> 
+                        )}
+                       
+                      </motion.div>
             </div>
             {item.offer && (
                     <div>
-                      <div className="w-14 h-6 bg-red-500 absolute top-4 left-2 z-30 rounded-e-md flex items-center justify-center">
+                      <div className="w-14 h-6 bg-red-500 absolute top-4 left-1 z-30 rounded-e-md flex items-center justify-center">
                         <p>{item.offer}</p>
                       </div>
                       <div className="w-14 h-6 bg-red-400 absolute top-[24px] left-0 z-10"></div>
-                      <div className="w-14 h-10 bg-red-200 absolute top-[25px] left-[14px] rotate-45 z-10"></div>
+                      <div className=" bg-red-200 absolute top-[9px] left-[19px] rotate-45 z-10"></div>
                     </div>
                   )}
             </div>
@@ -569,13 +584,13 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
               <p className="text-base font-semibold text-textColor md:text-lg">
                 ratings
               </p>
-              <p className="text-base font-semibold text-textColor md:text-lg">
+              <p className="text-base text-textColor md:text-lg">
                 {item?.item_name}
               </p>
             </div>
             <div className="flex items-center flex-row justify-between gap-8">
               <p className="text-lg font-semibold text-headingColor">
-                <span className="text-sm text-red-500">$</span> {item?.price}
+                <span className="text-sm text-red-500">$</span>{item?.price}
               </p>
               <motion.div
                 whileTap={{ scale: 1.2 }}
