@@ -8,6 +8,8 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 import logo from "../../img/woodhy-high-resolution-logo-transparent.png";
+import Login_popup from "../Login/Login_popup";
+import SignUp_popup from "../Login/SignUp_popup";
 
 export default function Header() {
   const [{ product, cartShow, user, cartItems, favorite_Items }, dispatch] =
@@ -22,13 +24,37 @@ export default function Header() {
   const [isFurnitureDropdownOpen, setFurnitureDropdownOpen] = useState(false);
   const [istoggleUserMenuOpen, setIstoggleUserMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [login_pop, setLogin_pop] = useState(false);
+  const [signup_pop, setSignup_pop] = useState(false);
+
+  const onClosing_log_pop = () => {
+    setLogin_pop(false)
+  }
+  const onClosing_Signup_pop = () => {
+    setSignup_pop(false)
+  }
+  const signUp_from_login_pop = () => {
+    setLogin_pop(false)
+    setSignup_pop(true)
+  }
+  const login_from_signup_pop = () => {
+    setLogin_pop(true)
+    setSignup_pop(false)
+  }
 
   const toggleFurnitureDropdown = () => {
     setFurnitureDropdownOpen(!isFurnitureDropdownOpen);
   };
   const toggleUserMenu = () => {
+    console.log("kireh")
     setIstoggleUserMenuOpen(!istoggleUserMenuOpen);
   };
+  const deva = () => {
+    console.log("eita")
+  }
+  const deva2 = () => {
+    console.log("eita 2")
+  }
 
   const DropmenuItem = [
     {
@@ -59,12 +85,12 @@ export default function Header() {
   ];
   const UserItem = [
     {
-      path: "/product",
+      path: "/account",
       name: "Profile",
       icon: <FaTh />,
     },
     {
-      path: null,
+      path: "/",
       name: "Log Out",
       icon: <FaTh />,
     },
@@ -259,32 +285,50 @@ export default function Header() {
                         "text-black border-b-2 border-b-amber-900 rounded-sm"
                       }`}
                       onClick={() => {
-                        navigate("/login");
+                        // navigate("/login");
+                        setLogin_pop(true)
                       }}
                     >
                       login
                     </li>
+
+                    {login_pop && (
+                      <Login_popup onClosing_log_pop={onClosing_log_pop} signUp_from_login_pop={signUp_from_login_pop}/>
+                    )
+                    }
+
                     <li
                       className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
                         pathMatchRoute("/signin") &&
                         "text-black border-b-2 border-b-amber-900 rounded-sm"
                       }`}
                       onClick={() => {
-                        navigate("/signin");
+                        // navigate("/signin");
+                        setSignup_pop(true)
                       }}
                     >
                       Signin
                     </li>
+
+                    {signup_pop && (
+                      <SignUp_popup onClosing_Signup_pop={onClosing_Signup_pop} login_from_signup_pop={login_from_signup_pop}/>
+                    )
+                    }
+
                   </ul>
                 ) : (
                   <ul className="flex">
                     <li
                       className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                        pathMatchRoute("/login") &&
+                        pathMatchRoute("") &&
                         "text-black border-b-2 border-b-amber-900 rounded-sm"
                       }`}
-                      onMouseEnter={() => toggleUserMenu()}
-                      onMouseLeave={() => toggleUserMenu()}
+                      onMouseEnter={() => {
+                        deva()
+                        toggleUserMenu()}}
+                      onMouseLeave={() => {
+                        deva2()
+                        toggleUserMenu()}}
                     >
                       User
                       <div className="relative">

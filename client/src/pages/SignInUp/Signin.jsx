@@ -49,7 +49,7 @@ export default function Signin() {
 
     try {
       const response = await axios.post(
-        `${link}/api/v1/auth/register`,
+        `${link}/auth/register`,
         formData
       );
       console.log(response);

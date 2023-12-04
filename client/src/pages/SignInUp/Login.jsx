@@ -37,7 +37,7 @@ export default function Login() {
     console.log(formData);
     try {
       const response = await axios.post(
-        `${link}/api/v1/auth/login`,
+        `${import.meta.env.VITE_LINK}/auth/login`,
         formData
       );
       console.log(response);

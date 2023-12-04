@@ -1,6 +1,8 @@
 import React from "react";
 import {BsChatFill,BsCheckCircle} from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
 export default function InfoDiv_1() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col md:flex-row gap-20 items-center justify-between text-gray-900 md:p-16 md:mt-16 mt-20">
       <div className="relative">
@@ -50,7 +52,9 @@ export default function InfoDiv_1() {
         <p>Experience Unparalleled Quality</p>
         <p>Built to Last for generation</p>
         <p>Loved by Customers</p>
-        <button className="rounded-lg px-4 w-44 py-2 border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5">
+        <button className="rounded-lg px-4 w-44 py-2 border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5" onClick={() => {
+              navigate("/shop");
+            }}>
           Shop Now
         </button>
       </div>

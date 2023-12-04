@@ -13,6 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Cata_wise_product from "../../component/Home/Cata_wise_product";
 import InfoDiv_2 from "../../component/Home/InfoDiv_2";
+import { useNavigate } from "react-router-dom";
   
 
 
@@ -22,6 +23,8 @@ export default function Home() {
 
 console.log(data)
 console.log(product)
+
+ const navigate = useNavigate()
 
 async function fetchingData() {
   console.log("holo h" + import.meta.env.VITE_LINK);
@@ -97,7 +100,9 @@ async function fetchingData() {
               
               <p>elevate your home</p>
             </p>
-            <button className="rounded-lg px-4 py-2 border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5">
+            <button className="rounded-lg px-4 py-2 border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5" onClick={() => {
+              navigate("/shop");
+            }}>
               Explore More
             </button>
           </div>
@@ -140,7 +145,9 @@ async function fetchingData() {
               <p className="text-gray-700">Check out our feature products</p>
             </div>
             <div>
-            <button className="rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5">
+            <button className="rounded-3xl px-5 py-2 text-lg border-2 border-gray-900 text-gray-800 hover:bg-gray-900 hover:text-gray-100 duration-300 mt-5" onClick={() => {
+              navigate("/shop");
+            }}>
               View All Categories
             </button>
             </div>

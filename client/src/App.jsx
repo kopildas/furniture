@@ -24,6 +24,7 @@ import Footer from './component/Footer/Footer';
 import { useStateValue } from './context/StateProvider';
 import CartContainer from './component/Home/CartContainer';
 import ViewCart from './pages/Shop/ViewCart';
+import Account from './pages/Account/Account';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -44,6 +45,8 @@ function App() {
         <Route path="/singleitem/:id" element={<SingleItem />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/account" element={<Account />} />
+
         <Route path="/admin" element={<PrivateAdminRoute/>}>
           <Route path="/admin/dashboard" element={<Dashboard/>} />
           <Route path="/admin/products" element={<All_Products/>} />

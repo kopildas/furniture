@@ -170,7 +170,7 @@ console.log(data)
           </div>
         </div>
 
-        <div className="w-full bg-slate-00 mt-5 flex flex-col">
+        <div className="w-full bg-slate-00 flex flex-col">
           <div className="flex flex-col md:flex-row md:items-center gap-5 justify-between overflow-y-auto top-5 bg-slate-50 rounded-md border px-4 z-40">
             <div className="flex p-2 text-2xl gap-5">
               <div

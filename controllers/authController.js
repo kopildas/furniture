@@ -46,8 +46,47 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({user,token});
 };
 const updateUser = async (req, res) => {
-  res.send("update user");
-};
+ 
+    const userId = req.params.id; // Assuming you pass the product ID in the request parameters
+  
+    // Check if the product ID is valid (you can use a validation library or a custom validation function)
+    if (!userId) {
+      throw new BadReqError("Invalid product ID");
+    }
+  
+    let featureProductValue = req.body; // Data to update the product
+  
+    const user = await Users.findOne({_id: userId})
+  
+    if(!user){
+      throw new BadReqError(`No user with id ${userId}`);
+    }
+  
+  
+    try {
+      // Use Mongoose to find and update the user by ID
+      const updateData = {
+        feature_product: featureProductValue, // Specify the field you want to update and its new value
+      };
+      
+      const updatedProduct = await Users.findOneAndUpdate(
+        { _id: userId },
+        req.body,
+        { new: true,
+        runValidators:true } // Return the updated document
+      );
+  
+      if (!updatedProduct) {
+        throw new BadReqError("Product not found");
+      }
+  
+      res.status(StatusCodes.OK).json({ user: updatedProduct });
+    } catch (error) {
+      // Handle any errors that occur during the update process
+      console.error(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Unable to update the product" });
+    }
+  };
 
 const getall = async (req, res) => {
   const product = await Users.find();
