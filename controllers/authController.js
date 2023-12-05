@@ -18,8 +18,9 @@ const register = async (req, res) => {
   }
   
   const user = await Users.create(req.body);
+  
   const token = user.createJWT()
-  res.status(StatusCodes.CREATED).json({ user:{id:user._id,name:user.name,lastname:user.lastname,email:user.email},token,picture:user.picture });
+  res.status(StatusCodes.CREATED).json({ user:{id:user._id,name:user.name,lastname:user.lastname,email:user.email,phone:user.phone,picture:user.picture},token });
 };
 
 
@@ -48,14 +49,14 @@ const login = async (req, res) => {
 const updateUser = async (req, res) => {
  
     const userId = req.params.id; // Assuming you pass the product ID in the request parameters
-  
+  console.log(userId)
     // Check if the product ID is valid (you can use a validation library or a custom validation function)
     if (!userId) {
       throw new BadReqError("Invalid product ID");
     }
   
     let featureProductValue = req.body; // Data to update the product
-  
+  console.log(featureProductValue)
     const user = await Users.findOne({_id: userId})
   
     if(!user){

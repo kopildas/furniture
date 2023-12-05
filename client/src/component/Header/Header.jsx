@@ -29,10 +29,11 @@ export default function Header() {
 
   const onClosing_log_pop = () => {
     setLogin_pop(false);
-    setIstoggleUserMenuOpen(!istoggleUserMenuOpen);
+    setIstoggleUserMenuOpen(false);
   };
   const onClosing_Signup_pop = () => {
     setSignup_pop(false);
+    setIstoggleUserMenuOpen(false);
   };
   const signUp_from_login_pop = () => {
     setLogin_pop(false);

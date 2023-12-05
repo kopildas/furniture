@@ -32,10 +32,19 @@ export default function Account() {
       [e.target.id]: e.target.value,
     }));
   }
+  console.log(user)
 
   async function handleEditUserData(e) {
     e.preventDefault();
     console.log(formData);
+    let id;
+    if(user.id)
+    {
+      id=user.id
+    }else if(user._id){
+      id=user._id
+    }
+    console.log(id)
     const phoneRegex = /^[0-9]+$/;
     const isPhoneNumberValid = phoneRegex.test(formData.phone);
 
@@ -55,7 +64,7 @@ export default function Account() {
     if(isEmailValid && isPhoneNumberValid && formData.phone.length === 11){
       try {
         const response = await axios.put(
-          `${import.meta.env.VITE_LINK}/auth/${user._id}`,
+          `${import.meta.env.VITE_LINK}/auth/${id}`,
           formData
         );
         console.log(response);

@@ -61,6 +61,7 @@ export default function Login_popup({onClosing_log_pop,signUp_from_login_pop}) {
           });
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("token", (token));
+          onClosing_log_pop();
           setIsLoader(false)
         } catch (err) {
           const responseText = err.response.data;
@@ -76,8 +77,8 @@ export default function Login_popup({onClosing_log_pop,signUp_from_login_pop}) {
         if(user) {
           setTimeout(() => {
             // navigate('/')
+            
             setIsLoader(false)
-            onClosing_log_pop();
           },3000)
         }
       },[user])
