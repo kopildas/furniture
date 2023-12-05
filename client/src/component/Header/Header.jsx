@@ -231,11 +231,11 @@ export default function Header() {
                 </li>
                 <li
                   className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                    pathMatchRoute("/projects") &&
+                    pathMatchRoute("/showroom") &&
                     "text-black border-b-2 border-b-amber-900 rounded-sm"
                   }`}
                   onClick={() => {
-                    navigate("/projects");
+                    navigate("/showroom");
                   }}
                 >
                   Showroom

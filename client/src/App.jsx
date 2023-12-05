@@ -25,6 +25,7 @@ import { useStateValue } from './context/StateProvider';
 import CartContainer from './component/Home/CartContainer';
 import ViewCart from './pages/Shop/ViewCart';
 import Account from './pages/Account/Account';
+import Showroom from './pages/Showroom/Showroom';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -41,6 +42,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/showroom" element={<Showroom />} />
         <Route path="/viewcart" element={<ViewCart />} />
         <Route path="/singleitem/:id" element={<SingleItem />} />
         <Route path="/login" element={<Login />} />
