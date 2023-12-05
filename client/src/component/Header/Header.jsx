@@ -29,6 +29,7 @@ export default function Header() {
 
   const onClosing_log_pop = () => {
     setLogin_pop(false)
+    setIstoggleUserMenuOpen(!istoggleUserMenuOpen);
   }
   const onClosing_Signup_pop = () => {
     setSignup_pop(false)
@@ -121,6 +122,7 @@ export default function Header() {
       });
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      toggleUserMenu()
     }
   };
   useEffect(() => {
@@ -254,7 +256,7 @@ export default function Header() {
                   >
                     <GiShoppingCart />
                     {cartItems && cartItems.length > 0 && (
-                      <div className="absolute top-16 w-5 h-5 bg-red-500 mix-blend-multiply right rounded-full flex items-center justify-center">
+                      <div className="absolute top-16 w-5 h-5 bg-red-200 right rounded-full flex items-center justify-center">
                         <p className="text-white font-semibold text-xs">
                           {cartItems.length}
                         </p>
@@ -268,7 +270,7 @@ export default function Header() {
                     {favorite_Items_Length &&
                       favorite_Items_Length.length > 0 && (
                         <div
-                          className={`absolute top-16 w-5 h-5 bg-red-500 mix-blend-multiply right rounded-full flex items-center justify-center`}
+                          className={`absolute top-16 w-5 h-5 bg-red-200 right rounded-full flex items-center justify-center`}
                         >
                           <p className="text-white font-semibold text-xs">
                             {favorite_Items_Length.length}

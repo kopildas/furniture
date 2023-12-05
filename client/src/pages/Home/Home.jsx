@@ -1,7 +1,7 @@
 import React from "react";
 import HeroPic from "../../img/modern-living-room-interior-design (1).jpg";
 import { useState, useEffect } from 'react';
-import './Home.css'
+
 
 import '@splidejs/react-splide/css/skyblue';
 import '@splidejs/react-splide/css/sea-green';
@@ -115,10 +115,9 @@ async function fetchingData() {
             />
           </div>
         </div>
-        
         <div className="hidden md:flex md:h-24 h-auto w-3/4 rounded-[6rem] md:-mt-10 bg-slate-100 shadow-md text-gray-800  shadow-gray-200 relative ">
           
-          <div className="flex flex-col md:flex-row items-center justify-between gap-5 w-full p-7 ">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5 w-full p-7 scroll-content">
             <div className="flex flex-col w-1/5 items-center justify-center">
               <p className="text-md font-semibold">Confort</p>
               <p>Cozy Seating</p>
