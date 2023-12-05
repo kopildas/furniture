@@ -201,7 +201,7 @@ export default function Header() {
                 </li>
                 <li
                   className={`cursor-pointer py-3 w-24 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
-                    pathMatchRoute("/projects") &&
+                    pathMatchRoute("/shop") &&
                     "text-black border-b-2 border-b-amber-900 rounded-sm"
                   }`}
                   onMouseEnter={() => toggleFurnitureDropdown()}
@@ -254,7 +254,7 @@ export default function Header() {
                   >
                     <GiShoppingCart />
                     {cartItems && cartItems.length > 0 && (
-                      <div className="absolute top-16 w-5 h-5 bg-red-500 right-44 rounded-full flex items-center justify-center">
+                      <div className="absolute top-16 w-5 h-5 bg-red-500 mix-blend-multiply right rounded-full flex items-center justify-center">
                         <p className="text-white font-semibold text-xs">
                           {cartItems.length}
                         </p>
@@ -268,7 +268,7 @@ export default function Header() {
                     {favorite_Items_Length &&
                       favorite_Items_Length.length > 0 && (
                         <div
-                          className={`absolute top-16 w-5 h-5 bg-red-500 right-28 rounded-full flex items-center justify-center`}
+                          className={`absolute top-16 w-5 h-5 bg-red-500 mix-blend-multiply right rounded-full flex items-center justify-center`}
                         >
                           <p className="text-white font-semibold text-xs">
                             {favorite_Items_Length.length}
