@@ -9,7 +9,7 @@ import OrderGraph from "../../component/Admin_Comp/Dashboard/OrderGraph";
 
 export default function Dashboard() {
   return (
-    <div className="mt-20 flex text-black">
+    <div className="mt-10 flex text-black">
       <Sidebar className="sticky scroll-m-0 z-50" />
       <div className="w-full p-10">
         <div className="flex items-center justify-between">
