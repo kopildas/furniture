@@ -70,6 +70,7 @@ export default function Account() {
         });
         localStorage.setItem("user", JSON.stringify(response.data.user));
         // localStorage.setItem("token", token);
+        setSave(false);
       } catch (err) {
         const responseText = err.response.data;
   

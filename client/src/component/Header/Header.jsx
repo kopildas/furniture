@@ -28,34 +28,34 @@ export default function Header() {
   const [signup_pop, setSignup_pop] = useState(false);
 
   const onClosing_log_pop = () => {
-    setLogin_pop(false)
+    setLogin_pop(false);
     setIstoggleUserMenuOpen(!istoggleUserMenuOpen);
-  }
+  };
   const onClosing_Signup_pop = () => {
-    setSignup_pop(false)
-  }
+    setSignup_pop(false);
+  };
   const signUp_from_login_pop = () => {
-    setLogin_pop(false)
-    setSignup_pop(true)
-  }
+    setLogin_pop(false);
+    setSignup_pop(true);
+  };
   const login_from_signup_pop = () => {
-    setLogin_pop(true)
-    setSignup_pop(false)
-  }
+    setLogin_pop(true);
+    setSignup_pop(false);
+  };
 
   const toggleFurnitureDropdown = () => {
     setFurnitureDropdownOpen(!isFurnitureDropdownOpen);
   };
   const toggleUserMenu = () => {
-    console.log("kireh")
+    console.log("kireh");
     setIstoggleUserMenuOpen(!istoggleUserMenuOpen);
   };
   const deva = () => {
-    console.log("eita")
-  }
+    console.log("eita");
+  };
   const deva2 = () => {
-    console.log("eita 2")
-  }
+    console.log("eita 2");
+  };
 
   const DropmenuItem = [
     {
@@ -84,18 +84,36 @@ export default function Header() {
       icon: <FaUserAlt />,
     },
   ];
-  const UserItem = [
+  const [UserItem, setUserItem] = useState([
     {
       path: "/account",
       name: "Profile",
-      icon: <FaTh />,
     },
     {
       path: "/",
       name: "Log Out",
-      icon: <FaTh />,
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    // Check if user.email is equal to "w3@gmail.com"
+    if (user && user.email === "w3@gmail.co") {
+      // Update userItem with the additional object for "Special Item"
+      setUserItem(prevItems => [
+        ...prevItems,
+        {
+          path: "/admin/dashboard",
+          name: "Admin",
+          
+        },
+      ]);
+    } else {
+      // Update userItem by removing the "admin/dashboard Item" if user.email is not "w3@gmail.com"
+      setUserItem(prevItems => prevItems.filter(item => item.path !== "/admin/dashboard"));
+    }
+
+    // ... any other logic or dispatch you may need
+  }, [user]);
 
   function pathMatchRoute(route) {
     if (route === location.pathname) {
@@ -122,7 +140,7 @@ export default function Header() {
       });
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-      toggleUserMenu()
+      toggleUserMenu();
     }
   };
   useEffect(() => {
@@ -288,16 +306,18 @@ export default function Header() {
                       }`}
                       onClick={() => {
                         // navigate("/login");
-                        setLogin_pop(true)
+                        setLogin_pop(true);
                       }}
                     >
                       login
                     </li>
 
                     {login_pop && (
-                      <Login_popup onClosing_log_pop={onClosing_log_pop} signUp_from_login_pop={signUp_from_login_pop}/>
-                    )
-                    }
+                      <Login_popup
+                        onClosing_log_pop={onClosing_log_pop}
+                        signUp_from_login_pop={signUp_from_login_pop}
+                      />
+                    )}
 
                     <li
                       className={`cursor-pointer py-3 w-16 h-9 text-xl flex items-center justify-center text-gray-600 hover:text-gray-500  ${
@@ -306,17 +326,18 @@ export default function Header() {
                       }`}
                       onClick={() => {
                         // navigate("/signin");
-                        setSignup_pop(true)
+                        setSignup_pop(true);
                       }}
                     >
                       Signin
                     </li>
 
                     {signup_pop && (
-                      <SignUp_popup onClosing_Signup_pop={onClosing_Signup_pop} login_from_signup_pop={login_from_signup_pop}/>
-                    )
-                    }
-
+                      <SignUp_popup
+                        onClosing_Signup_pop={onClosing_Signup_pop}
+                        login_from_signup_pop={login_from_signup_pop}
+                      />
+                    )}
                   </ul>
                 ) : (
                   <ul className="flex">
@@ -326,11 +347,13 @@ export default function Header() {
                         "text-black border-b-2 border-b-amber-900 rounded-sm"
                       }`}
                       onMouseEnter={() => {
-                        deva()
-                        toggleUserMenu()}}
+                        deva();
+                        toggleUserMenu();
+                      }}
                       onMouseLeave={() => {
-                        deva2()
-                        toggleUserMenu()}}
+                        deva2();
+                        toggleUserMenu();
+                      }}
                     >
                       User
                       <div className="relative">
