@@ -21,7 +21,7 @@ export default function Footer() {
       {!shouldHideFooter && (
         <footer>
           <div className="flex flex-col md:flex-row text-gray-900 md:items-center justify-between md:p-20 pl-10 md:pl-40 md:pr-40 gap-20">
-            <div className="md:w-1/4 md:h-28">
+            <div className="md:w-1/4 md:h-28 -mt-16">
               <img
                 className="w-48"
                 src="https://i.ibb.co/0sHCMWj/woodhy-high-resolution-logo-transparent.png"
