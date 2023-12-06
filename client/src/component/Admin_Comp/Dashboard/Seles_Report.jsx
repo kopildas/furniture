@@ -52,7 +52,9 @@ export default function Seles_Report() {
 
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div className='w-full h-full'>
+
+<ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={500}
           height={400}
@@ -73,5 +75,7 @@ export default function Seles_Report() {
           <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
         </AreaChart>
       </ResponsiveContainer>
+
+    </div>
   )
 }

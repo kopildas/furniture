@@ -1,5 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import React, { PureComponent } from 'react';
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+
+import { useEffect, useState, useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { toast } from "react-toastify";
 import { useStateValue } from "../../../context/StateProvider";
@@ -7,7 +10,7 @@ import { useStateValue } from "../../../context/StateProvider";
 export default function OrderGraph() {
   const [{ product, user }, dispatch] = useStateValue();
 
-  const [data, setData] = useState(product);
+  // const [data, setData] = useState(product);
   const [userData, setUserData] = useState(null);
   const chartRef = useRef(null); // Create a ref for the chart component
 
@@ -15,87 +18,51 @@ export default function OrderGraph() {
     // Your fetchData function here
   }
 
-  function graphData() {
-    if (data) {
-      // Your graphData function here
+ 
 
-        const category = [
-          { value: "Chair", label: "Chair" },
-          { value: "Table", label: "Table" },
-          { value: "Bed", label: "Bed" },
-          { value: "Closet", label: "Closet" },
-          { value: "Sofa", label: "Sofa" },
-        ];
   
-        const categoryCounts = data.reduce((counts, item) => {
-          const category = item.category;
-          counts[category] = (counts[category] || 0) + 1;
-          return counts;
-        }, {});
   
-        const updatedCategoryList = category.map((category) => ({
-          value: category.value,
-          label: `${categoryCounts[category.value] || 0}`,
-        }));
+  const data = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 400 },
+    { name: 'Group D', value: 300 },
+    { name: 'Group E', value: 40 },
+  ];
   
-        const us = {
-          labels: updatedCategoryList.map((data) => data.value),
-          datasets: [
-            {
-              label: "Quantity",
-              data: updatedCategoryList.map((data) => parseInt(data.label)),
-              backgroundColor: [
-                "rgba(75,192,192,1)",
-                "#ecf0f1",
-                "#50AF95",
-                "#f3ba2f",
-                "#2a71d0",
-              ],
-              borderColor: "black",
-              borderWidth: 2,
-            },
-          ],
-        }
-      // Before setting new chart data, destroy the existing chart
-      if (chartRef.current) {
-        chartRef.current.chartInstance.destroy();
-      }
-
-      setUserData(us);
-    }
-  }
-
-  useEffect(() => {
-    graphData();
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      graphData();
-    }
-  }, []);
-
-  // Cleanup the chart when the component unmounts
-  useEffect(() => {
-    return () => {
-      if (chartRef.current) {
-        chartRef.current.chartInstance.destroy();
-      }
-    };
-  }, []);
+  const COLORS = ['#0088FE', 'rgb(74 222 128 / var(--tw-bg-opacity))', 'rgb(250 204 21 / var(--tw-bg-opacity))', 'rgb(251 146 60 / var(--tw-bg-opacity))','rgb(220 38 38 / var(--tw-bg-opacity))'];
+  
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
-    <div className="bg-slate-300 px-6 py-6 rounded-md">
-      <div>
-        <p className="font font-semibold text-2xl">Food Category</p>
-        <div className="flex p-5 mt-2 backdrop-blur-sm items-center justify-center rounded-lg">
-          <div className="flex items-center justify-center w-[400px] h-[400px]">
-            {/* {userData && (
-              <Doughnut data={userData} ref={chartRef} /> 
-            )} */}
-          </div>
-        </div>
-      </div>
-    </div>
+    <ResponsiveContainer width="100%" height="100%">
+    <PieChart width={400} height={400}>
+      <Pie
+        data={data}
+        cx="50%"
+        cy="50%"
+        labelLine={false}
+        label={renderCustomizedLabel}
+        outerRadius={110}
+        fill="#8884d8"
+        dataKey="value"
+      >
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+    </PieChart>
+  </ResponsiveContainer>
   );
 }

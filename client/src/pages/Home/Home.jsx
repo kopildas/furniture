@@ -28,7 +28,7 @@ console.log(product)
  const navigate = useNavigate()
 
 async function fetchingData() {
-  console.log("holo h" + import.meta.env.VITE_LINK);
+  // console.log("holo h" + import.meta.env.VITE_LINK);
   if (data) {
     try {
       dispatch({

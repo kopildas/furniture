@@ -31,6 +31,21 @@ function App() {
   const [count, setCount] = useState(0)
   const [{ product,cartShow, user, shop_category }, dispatch] = useStateValue();
 
+  // const location = useLocation();
+
+  // Define an array of route paths where you want to hide the footer
+  const hideFooterRoutes = [
+    '/admin/dashboard',
+    '/admin/products',
+    '/admin/products/addproducts',
+    '/admin/products/addproducts/edit',
+    '/admin/users',
+  ];
+
+  // Check if the current route matches any of the paths to hide the footer
+  // const shouldHideFooter = hideFooterRoutes.some(path => location.pathname.startsWith(path));
+
+
   return (
     <>
       <div className="w-screen h-auto flex flex-col  bg-white">

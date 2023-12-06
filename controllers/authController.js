@@ -92,7 +92,8 @@ const updateUser = async (req, res) => {
 const getall = async (req, res) => {
   const product = await Users.find();
 
-  res.status(StatusCodes.OK).json({ product });
+  const reversedProducts = product.reverse(); 
+  res.status(StatusCodes.OK).json({ product: reversedProducts });
 };
 
 export {getall, register, login, updateUser };
