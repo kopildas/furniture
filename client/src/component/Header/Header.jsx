@@ -98,23 +98,30 @@ export default function Header() {
 
   useEffect(() => {
     // Check if user.email is equal to "w3@gmail.com"
-    if (user && user.email === "w3@gmail.co") {
-      // Update userItem with the additional object for "Special Item"
-      setUserItem(prevItems => [
-        ...prevItems,
-        {
-          path: "/admin/dashboard",
-          name: "Admin",
-          
-        },
-      ]);
-    } else {
-      // Update userItem by removing the "admin/dashboard Item" if user.email is not "w3@gmail.com"
-      setUserItem(prevItems => prevItems.filter(item => item.path !== "/admin/dashboard"));
-    }
-
-    // ... any other logic or dispatch you may need
+  if (user && user.email === "w3@gmail.co" && UserItem.length === 2) {
+    // Update userItem with the additional object for "Special Item"
+    setUserItem((prevItems) => {
+      const uniquePaths = new Set(prevItems.map((item) => item.path));
+      if (!uniquePaths.has("/admin/dashboard")) {
+        return [
+          ...prevItems,
+          {
+            path: "/admin/dashboard",
+            name: "Admin",
+          },
+        ];
+      }
+      return prevItems;
+    });
+  } else {
+    // Update userItem by removing the "admin/dashboard Item" if user.email is not "w3@gmail.com"
+    setUserItem((prevItems) =>
+      prevItems.filter((item) => item.path !== "/admin/dashboard")
+    );
+  }
   }, [user]);
+
+  
 
   function pathMatchRoute(route) {
     if (route === location.pathname) {

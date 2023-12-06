@@ -4,14 +4,15 @@ import Box from "../../component/Admin_Comp/Dashboard/Box";
 import Transaction from "../../component/Admin_Comp/Dashboard/Transaction";
 import TopProd from "../../component/Admin_Comp/Dashboard/TopProd";
 import OrderGraph from "../../component/Admin_Comp/Dashboard/OrderGraph";
+import Seles_Report from "../../component/Admin_Comp/Dashboard/Seles_Report";
 // import Sidebar from "../../component/Admin_Comp/Sidebar/Sidebar";
 // // import Sidebar from "../../component/Header/Admin_comp/Sidebar/Sidebar";
 
 export default function Dashboard() {
   return (
-    <div className="mt-10 flex text-black">
+    <div className="mt-10 w- flex text-black">
       <Sidebar className="sticky scroll-m-0 z-50" />
-      <div className="w-full p-10">
+      <div className="p-10">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
             <h3 className="text-4xl font-bold text-gray-700">Welcome Back</h3>
@@ -23,7 +24,7 @@ export default function Dashboard() {
         </div>
         <div className="mt-5 bg-gray-100  rounded-lg p-5 flex flex-col gap-5 text-gray-600 ">
           <div className="flex gap-5">
-            <div className="flex flex-col gap-5">
+            <div className="flex w-1/2 flex-col gap-5">
               <div className="flex gap-5">
                 <Box
                   text={"Balance"}
@@ -53,7 +54,10 @@ export default function Dashboard() {
                 />
               </div>
             </div>
-            <div className="w-full bg-lime-400 rounded-lg"></div>
+            <div className="w-1/2 p-10 rounded-lg">
+              {/* <p>Seles Report</p> */}
+              <Seles_Report/>
+            </div>
           </div>
 
           <div className="flex gap-5">
