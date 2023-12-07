@@ -8,45 +8,45 @@ export default function Seles_Report() {
     const data = [
         {
           name: 'Jan',
-          uv: 4000,
-          pv: 2400,
-          amt: 2400,
+          Via_Referral: 4000,
+          Direct: 2400,
+          Via_Social: 2400,
         },
         {
           name: 'Feb',
-          uv: 3000,
-          pv: 1398,
-          amt: 2210,
+          Via_Referral: 3000,
+          Direct: 1398,
+          Via_Social: 2210,
         },
         {
           name: 'Mar',
-          uv: 2000,
-          pv: 9800,
-          amt: 2290,
+          Via_Referral: 2000,
+          Direct: 9800,
+          Via_Social: 2290,
         },
         {
           name: 'Apr',
-          uv: 2780,
-          pv: 3908,
-          amt: 2000,
+          Via_Referral: 2780,
+          Direct: 3908,
+          Via_Social: 2000,
         },
         {
           name: 'May',
-          uv: 1890,
-          pv: 4800,
-          amt: 2181,
+          Via_Referral: 1890,
+          Direct: 4800,
+          Via_Social: 2181,
         },
         {
           name: 'Jun',
-          uv: 2390,
-          pv: 3800,
-          amt: 2500,
+          Via_Referral: 2390,
+          Direct: 3800,
+          Via_Social: 2500,
         },
         {
           name: 'Jly',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
+          Via_Referral: 3490,
+          Direct: 4300,
+          Via_Social: 2100,
         },
       ];
 
@@ -70,9 +70,9 @@ export default function Seles_Report() {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-          <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-          <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+          <Area type="monotone" dataKey="Via_Referral" stackId="1" stroke="#8884d8" fill="#8884d8" />
+          <Area type="monotone" dataKey="Direct" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+          <Area type="monotone" dataKey="Via_Social" stackId="1" stroke="#ffc658" fill="#ffc658" />
         </AreaChart>
       </ResponsiveContainer>
 

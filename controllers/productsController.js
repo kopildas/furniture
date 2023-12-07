@@ -62,7 +62,7 @@ const updateProduct = async (req, res) => {
 
   let featureProductValue = req.body; // Data to update the product
 
-  const product = await Products.findOne({_id: productId})
+  let product = await Products.findOne({_id: productId})
 
   if(!product){
     throw new BadReqError(`No product with id ${productId}`);
@@ -85,8 +85,11 @@ const updateProduct = async (req, res) => {
     if (!updatedProduct) {
       throw new BadReqError("Product not found");
     }
-
-    res.status(StatusCodes.OK).json({ product: updatedProduct });
+    product = await Products.find();
+  const reversedProducts = product.reverse(); // Reverse the order of products
+console.log("reversedProducts")
+  res.status(StatusCodes.OK).json({ product: reversedProducts });
+    // res.status(StatusCodes.OK).json({ product: updatedProduct });
   } catch (error) {
     // Handle any errors that occur during the update process
     console.error(error);
@@ -95,28 +98,36 @@ const updateProduct = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
-  const productId = req.params.id; // Assuming you pass the product ID in the request parameters
+  const productId = req.params.id;
 
-  // Check if the product ID is valid (you can use a validation library or a custom validation function)
   if (!productId) {
     throw new BadReqError("Invalid product ID");
   }
 
   try {
-    // Use Mongoose to find and delete the product by ID
-    const deletedProduct = await Products.findOneAndDelete({ _id: productId });
+    const deletedProduct = await Products.findOneAndDelete(
+      { _id: productId },
+      req.body,
+      { new: true, runValidators: true }
+    );
 
     if (!deletedProduct) {
       throw new BadReqError("Product not found");
     }
 
-    res.status(StatusCodes.OK).json({ message: "Product deleted successfully" });
+    // Retrieve the updated list of products after deletion
+    const updatedProducts = await Products.find();
+    const reversedProducts = updatedProducts.reverse();
+
+    res.status(StatusCodes.OK).json({ product: reversedProducts });
   } catch (error) {
-    // Handle any errors that occur during the delete process
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Unable to delete the product" });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Unable to delete the product" });
   }
 };
+
 
 const showStatsProduct = async (req, res) => {
   res.send("show stats bioooo");

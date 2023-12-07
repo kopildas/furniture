@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ImgShow from './ImgShow';
 import ImgInput from './ImgInput';
 import Loader from '../Loader';
@@ -6,10 +6,14 @@ import GallaryImgShow from './GallaryImgShow';
 import { toast } from 'react-toastify';
 import Select from 'react-tailwindcss-select';
 import axios from 'axios';
+import { actionType } from '../../context/reducer';
+import { useStateValue } from '../../context/StateProvider';
 
 export default function EditProduct({item,visible,onClose}) {
-  console.log(item.image);
+  console.log(item);
   // if (!visible) return null;
+  const [{ product, user,updateProd }, dispatch] = useStateValue();
+
   const [isLoadding, setIsLoadding] = useState(false);
   // toast.success("Product feature edit updated successfully!");
   let [formData, setFormData] = useState(item);
@@ -28,6 +32,13 @@ export default function EditProduct({item,visible,onClose}) {
     gal_3_imgURL,
   } = formData;
 
+  useEffect(() => {
+    if (item) {
+      // Set formData with the values from item once it is available
+      setFormData(item);
+      setCatego(item.category);
+    }
+  }, [item]);
 
   const options = [
     { value: "Chair", label: "Chair" },
@@ -122,7 +133,12 @@ export default function EditProduct({item,visible,onClose}) {
         `${import.meta.env.VITE_LINK}/products/${item._id}`,
         formData
       );
-      console.log(response);
+      dispatch({
+        type: actionType.SET_PRODUCTS,
+        product: response.data.product,
+      });
+      console.log(response.data.product)
+      localStorage.setItem("product", JSON.stringify(response.data.product));
       toast.success("Product Updated succesfully..!")
       onClose()
       // const { user, token } = response.data;
@@ -157,7 +173,7 @@ export default function EditProduct({item,visible,onClose}) {
     <div
       id="cont"
       // onClick={handleOnChange}
-      className="fixed inset-0 flex items-center justify-center bg-opacity-5 backdrop-blur-sm z-40 p-10 "
+      className="fixed inset-0 flex items-center justify-center bg-opacity-5 backdrop-blur-sm z-50 p-10 "
     >
       <div className="w-full p-4 bg-gray-50 rounded-lg border border-gray-3 00 md:p-6">
       <div className="mt-5 bg-gray-200  rounded-lg p-7 flex flex-col gap-5 text-gray-600">

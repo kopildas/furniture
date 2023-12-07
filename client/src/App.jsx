@@ -26,6 +26,8 @@ import CartContainer from './component/Home/CartContainer';
 import ViewCart from './pages/Shop/ViewCart';
 import Account from './pages/Account/Account';
 import Showroom from './pages/Showroom/Showroom';
+import Review from './pages/Admin/Review';
+import Orders from './pages/Admin/Orders';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -70,6 +72,8 @@ function App() {
           <Route path="/admin/products/addproducts" element={<AddProducts/>} />
           <Route path="/admin/products/addproducts/edit" element={<EditProduct/>} />
           <Route path="/admin/users" element={<Users/>} />
+          <Route path="/admin/orders" element={<Orders/>} />
+          <Route path="/admin/review" element={<Review/>} />
         </Route>
         </Routes>
         <Footer/>

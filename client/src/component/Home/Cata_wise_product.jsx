@@ -9,7 +9,7 @@ export default function Cata_wise_product() {
 
   // const new_arrival_Products = product.slice(0, 8);
   // const [data,setData] = useState(new_arrival_Products)
-  const [data, setData] = useState(product ? product.slice(0, 8) : []);
+  const [data, setData] = useState(null);
   const [activeCategory, setActiveCategory] = useState("new_arrival");
 
   const updateDATA = () => {

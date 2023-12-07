@@ -1,20 +1,34 @@
 import axios from 'axios';
 import React from 'react'
 import { toast } from 'react-toastify';
+import { actionType } from '../../context/reducer';
+import { useStateValue } from '../../context/StateProvider';
 
 export default function DeleteProduct({delvisible,delonClose,item}) {
-    const handleOnChange = (e) => {
+  
+  const [{}, dispatch] = useStateValue();
+  
+  
+  const handleOnChange = (e) => {
         if (e.target.id === "cont" || e.target.id === "close") {
             delonClose();
         }
       };
-
+console.log(item)
     async function onChange () {
         try {
             const response = await axios.delete(
               `${import.meta.env.VITE_LINK}/products/${item._id}`
             );
             console.log(response);
+
+            dispatch({
+              type: actionType.SET_PRODUCTS,
+              product: response.data.product,
+            });
+            console.log(response.data.product)
+            localStorage.setItem("product", JSON.stringify(response.data.product));
+
             toast.success("Product Deleted successfully..!")
             delonClose()
             // const { user, token } = response.data;

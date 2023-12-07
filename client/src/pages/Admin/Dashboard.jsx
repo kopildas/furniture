@@ -56,7 +56,7 @@ export default function Dashboard() {
                 />
               </div>
             </div>
-            <div className="w-1/2 p-10 rounded-lg flex flex-col">
+            <div className="w-1/2 p-10 rounded-lg flex flex-col border border-x-gray-300">
               <div className="w-full h-10">
                 <p className="text-2xl font-semibold -mt-8">Sales Report</p>
               </div>
@@ -100,7 +100,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="text w-3/4  rounded-lg border border-gray-300 p-4">
-              <p className="text-xl text-gray-800 font-semibold mb-2">
+              <p className="text-2xl font-semibold mb-2">
                 New Orders
               </p>
               <div className="p-2 flex flex-col gap-4">
@@ -112,7 +112,7 @@ export default function Dashboard() {
           <div className="flex  justify-between gap-7 w-full h-max">
             {/* top product */}
             <div className="p-5 w-3/4 flex flex-col bg-gray-200 border border-gray-300 rounded-lg">
-              <p className="text-xl text-gray-800 font-semibold mb-2">
+              <p className="text-2xl font-semibold mb-2">
                 Top Products
               </p>
               <div className="p-2 flex flex-col gap-4">
@@ -121,7 +121,7 @@ export default function Dashboard() {
             </div>
 
             <div className="flex flex-col p-5 gap-5 bg-gray-200 border border-gray-300 rounded-lg w-2/5">
-              <p className="text-xl text-gray-800 font-semibold mb-2">
+              <p className="text-2xl font-semibold mb-2">
                 New Customers
               </p>
               <div className="p-2 flex flex-col gap-4">

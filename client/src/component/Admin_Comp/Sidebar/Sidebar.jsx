@@ -46,16 +46,12 @@ export default function Sidebar({ children }) {
           name: "Add Products",
           icon: <FaThList />,
         },
-        {
-          path: "/admin/products",
-          name: "Food Items",
-          icon: <FaThList />,
-        },
+        
       ],
     },
     {
-      path: "/admin/wallet",
-      name: "Wallet",
+      path: "/admin/orders",
+      name: "Orders",
       icon: <FaRegChartBar />,
     },
     {
@@ -116,7 +112,7 @@ export default function Sidebar({ children }) {
         </div>
         <div
           className="menu-items-container"
-          style={{ position: "sticky", top: 70 }}
+          style={{ position: "sticky", top: 10 }}
         >
           {menuItem.map((item, index) => (
             <SidebarItem key={index} item={item} isOpen={isOpen} />

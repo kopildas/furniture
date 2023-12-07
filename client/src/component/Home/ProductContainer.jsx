@@ -183,7 +183,7 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
     favorite_Items=fetchFavorite()
     console.log(favorite_Items);
 
-    if (Array.isArray(favorite_Items)) {
+    if (Array.isArray(favorite_Items)) {data && 
       data.map((f) => {
         favorite_Items && favorite_Items.map((fav) => {
           if (f._id === fav.item_id) {

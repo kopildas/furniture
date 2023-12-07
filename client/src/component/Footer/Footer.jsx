@@ -10,6 +10,8 @@ export default function Footer() {
     "/admin/products/addproducts",
     "/admin/products/addproducts/edit",
     "/admin/users",
+    "/admin/orders",
+    "/admin/review",
   ];
 
   // Check if the current route matches any of the paths to hide the footer

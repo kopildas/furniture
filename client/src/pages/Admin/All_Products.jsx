@@ -12,6 +12,10 @@ export default function All_Products() {
   const [{ product, user,updateProd }, dispatch] = useStateValue();
   console.log(product);
   const [data, setData] = useState(product);
+  useEffect(() => {
+    setData(product)
+    console.log("jolo");
+  }, [product]);
   const [editprod, setEditprod] = useState(null);
   const [deleteprod, setDeleteprod] = useState(null);
   const [editedData, setEditedData] = useState(null);
@@ -24,6 +28,10 @@ export default function All_Products() {
   function delonClose() {
     setDelvisible(!delvisible);
   }
+  const edited = (itemdata) => {
+    setEditedData(itemdata);
+  };
+  console.log(editedData)
 
   async function onSubmit() {
     console.log("holo");
@@ -39,7 +47,7 @@ export default function All_Products() {
         );
         console.log(response.data.product);
         setData(response.data.product);
-        toast.success("Product added succesfully..!");
+        // toast.success("Product ad succesfully..!");
         dispatch({
           type: actionType.SET_PRODUCTS,
           product: response.data.product,
@@ -55,10 +63,7 @@ export default function All_Products() {
     }
   }
 
-  const edited = (itemdata) => {
-    setEditedData(itemdata);
-  };
-
+  
   console.log(data);
 
   useEffect(() => {
@@ -111,7 +116,7 @@ export default function All_Products() {
   }
 
   return (
-    <div className="mt-20 text-black flex">
+    <div className="mt-12 text-black flex">
       <Sidebar className="sticky scroll-m-0 z-50" />
 
       <div className="overflow-x-auto w-full p-10">

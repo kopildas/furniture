@@ -9,8 +9,8 @@ export default function Box({text,ammount,data,color}) {
           <p className="text-2xl text-gray-800">$ {ammount}</p>
           <p>{data}</p>
         </div>
-        <div className="flex items-end justify-end">
-          <div className="w-14 h-14 mb-5 rounded-full bg-slate-200"></div>
+        <div className="flex items-end justify-end pr-4">
+          {/* <div className="w-14 h-14 mb-5 rounded-full bg-slate-200"></div> */}
         </div>
       </div>
     </div>
