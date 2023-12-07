@@ -27,7 +27,7 @@ export default function Users() {
       }, []);
 
   return (
-    <div className="mt-20 text-black flex">
+    <div className="mt-12 text-black flex">
       <Sidebar className="sticky scroll-m-0 z-50" />
 
       <div className="overflow-x-auto w-full p-10">

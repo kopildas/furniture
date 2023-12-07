@@ -12,7 +12,7 @@ import New_customers from "../../component/Admin_Comp/Dashboard/New_customers";
 
 export default function Dashboard() {
   return (
-    <div className="mt-10 w- flex text-black">
+    <div className="mt-12 w- flex text-black">
       <Sidebar className="sticky scroll-m-0 z-50" />
       <div className="p-10">
         <div className="flex items-center justify-between">

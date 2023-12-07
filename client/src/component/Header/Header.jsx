@@ -98,30 +98,28 @@ export default function Header() {
 
   useEffect(() => {
     // Check if user.email is equal to "w3@gmail.com"
-  if (user && user.email === "w3@gmail.co" && UserItem.length === 2) {
-    // Update userItem with the additional object for "Special Item"
-    setUserItem((prevItems) => {
-      const uniquePaths = new Set(prevItems.map((item) => item.path));
-      if (!uniquePaths.has("/admin/dashboard")) {
-        return [
-          ...prevItems,
-          {
-            path: "/admin/dashboard",
-            name: "Admin",
-          },
-        ];
-      }
-      return prevItems;
-    });
-  } else {
-    // Update userItem by removing the "admin/dashboard Item" if user.email is not "w3@gmail.com"
-    setUserItem((prevItems) =>
-      prevItems.filter((item) => item.path !== "/admin/dashboard")
-    );
-  }
+    if (user && user.email === "w3@gmail.co" && UserItem.length === 2) {
+      // Update userItem with the additional object for "Special Item"
+      setUserItem((prevItems) => {
+        const uniquePaths = new Set(prevItems.map((item) => item.path));
+        if (!uniquePaths.has("/admin/dashboard")) {
+          return [
+            ...prevItems,
+            {
+              path: "/admin/dashboard",
+              name: "Admin",
+            },
+          ];
+        }
+        return prevItems;
+      });
+    } else {
+      // Update userItem by removing the "admin/dashboard Item" if user.email is not "w3@gmail.com"
+      setUserItem((prevItems) =>
+        prevItems.filter((item) => item.path !== "/admin/dashboard")
+      );
+    }
   }, [user]);
-
-  
 
   function pathMatchRoute(route) {
     if (route === location.pathname) {
@@ -291,7 +289,12 @@ export default function Header() {
                   </li>
                 </>
                 <>
-                  <li className="cursor-pointer w-16 h-9 text-3xl flex items-center justify-center text-gray-600 hover:text-gray-500 ">
+                  <li
+                    className="cursor-pointer w-16 h-9 text-3xl flex items-center justify-center text-gray-600 hover:text-gray-500 "
+                    onClick={() => {
+                      navigate("/favourite");
+                    }}
+                  >
                     <MdFavoriteBorder />
                     {favorite_Items_Length &&
                       favorite_Items_Length.length > 0 && (

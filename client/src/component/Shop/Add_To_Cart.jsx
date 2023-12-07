@@ -87,7 +87,7 @@ export default function Add_To_Cart({data,quantity}) {
       console.log(item);
       setCartData((prevCartData) => ({
         ...prevCartData,
-        item_id: item._id,
+        item_id: item._id || item.item_id,
         item_name: item.item_name,
         sale: item.sale,
         price: item.price,
@@ -95,7 +95,7 @@ export default function Add_To_Cart({data,quantity}) {
         purchase_quantity: quantity,
         cartORadd: "cart",
         SKU: item.SKU,
-        picture: item.image,
+        picture: item.image || item.picture,
         offer: item.offer,
       }));
   

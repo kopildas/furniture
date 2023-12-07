@@ -129,6 +129,7 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
     console.log(item);
     setFavoriteData((prevCartData) => ({
       ...prevCartData,
+      // item
       item_id: item._id,
       item_name: item.item_name,
       sale: item.sale,
@@ -141,6 +142,7 @@ export default function ProductContainer({ data, grid = "grid", updateDATA }) {
       offer: item.offer,
       favorite:true,
     }));
+    console.log(favoriteData)
 
     // let check = true;
     // if (Array.isArray(favorite_Items) && favorite_Items) {

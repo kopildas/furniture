@@ -28,6 +28,7 @@ import Account from './pages/Account/Account';
 import Showroom from './pages/Showroom/Showroom';
 import Review from './pages/Admin/Review';
 import Orders from './pages/Admin/Orders';
+import Favourite from './pages/Shop/Favourite';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -61,6 +62,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/showroom" element={<Showroom />} />
         <Route path="/viewcart" element={<ViewCart />} />
+        <Route path="/favourite" element={<Favourite />} />
         <Route path="/singleitem/:id" element={<SingleItem />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
