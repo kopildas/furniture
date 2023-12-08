@@ -16,10 +16,10 @@ export default function SingleItem() {
   const [displayImage, setDisplayIamge] = useState(null);
   const { id } = useParams();
   console.log(id);
-
+console.log(user)
   let [formData, setFormData] = useState({
     item_id: id,
-    user_id: user?.id || "",
+    user_id: user?._id || user?.id || "",
     user_name: user?.name || "",
     user_pic: user?.image || "https://i.ibb.co/gTnHqRV/pngegg.png",
     rating: 0,
