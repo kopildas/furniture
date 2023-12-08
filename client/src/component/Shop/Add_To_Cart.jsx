@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useStateValue } from '../../context/StateProvider';
 import { actionType } from '../../context/reducer';
+import { toast } from 'react-toastify';
 
 export default function Add_To_Cart({data,quantity}) {
 
@@ -107,6 +108,8 @@ export default function Add_To_Cart({data,quantity}) {
           return;
         }
       });
+      toast.success("Successfully added to the cart.")
+
       localStorage.removeItem("product");
       localStorage.setItem("product", JSON.stringify([...product]));
       // updateDATA();
@@ -133,7 +136,7 @@ export default function Add_To_Cart({data,quantity}) {
 
 
   return (
-    <button className="border w-full p-3 h-8 text-xl flex items-center justify-center"
+    <button className="border w-full p-3 h-8 text-xl hover:bg-slate-900 hover:text-white rounded-md flex items-center justify-center"
                 onClick={(e) => {
                     // stopEventPropagationTry(e); // Prevent event from propagating
                     addtoCart(data);

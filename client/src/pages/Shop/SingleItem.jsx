@@ -13,6 +13,7 @@ export default function SingleItem() {
   const [singleData, setSingleData] = useState(product);
   const [view, setView] = useState("description");
   const [quantity, setQuantity] = useState(1);
+  const [displayImage, setDisplayIamge] = useState(null);
   const { id } = useParams();
   console.log(id);
 
@@ -31,8 +32,13 @@ export default function SingleItem() {
     //   selectedFoodRef.current = foundItem;
     console.log(product)
     console.log(foundItem);
+    setDisplayIamge(foundItem.image)
     setSingleData(foundItem);
   }, []);
+
+  const changing_DisplayImage = (image)=> {
+    setDisplayIamge(image)
+  }
 
   const { review, rating, user_id, item_id } = formData;
 
@@ -86,14 +92,18 @@ export default function SingleItem() {
 
   return (
     <div className="text-gray-800">
-      <div className="flex md:flex-row flex-col mt-16 md:p-20 w-full text-gray-900 gap-64">
+      <div className="flex md:flex-row flex-col mt-10 md:p-20 w-full text-gray-900 gap-64">
         <div className="flex bg-green-60 gap-4 md:w-3/12">
           {/* gallary image */}
           <div className="hidden md:flex flex-col gap-4">
             <div>
-              {!singleData.gal_1_imgURL && (
+              {singleData.gal_1_imgURL && (
                 <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
-                  <div className="bg-slate-300 w-20 h-24 rounded-lg">
+                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" onClick={()=>{
+                    changing_DisplayImage(singleData.gal_1_imgURL)
+                  }}>
+                  <img src={singleData.gal_1_imgURL} alt=""  className="w-full h-full rounded-lg object-cover"/>
+
                     {/* {gal_1_imgURL ? (
                         <GallaryImgShow
                         id={"gal_1_imgURL"} 
@@ -111,9 +121,12 @@ export default function SingleItem() {
               )}
             </div>
             <div>
-              {!singleData.gal_2_imgURL && (
+              {singleData.gal_2_imgURL && (
                 <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
-                  <div className="bg-slate-300 w-20 h-24 rounded-lg">
+                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" onClick={()=>{
+                    changing_DisplayImage(singleData.gal_2_imgURL)
+                  }}>
+                    <img src={singleData.gal_2_imgURL} alt=""  className="w-full h-full rounded-lg object-cover"/>
                     {/* {gal_1_imgURL ? (
                         <GallaryImgShow
                         id={"gal_1_imgURL"} 
@@ -131,9 +144,13 @@ export default function SingleItem() {
               )}
             </div>
             <div>
-              {!singleData.gal_3_imgURL && (
+              {singleData.gal_3_imgURL && (
                 <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
-                  <div className="bg-slate-300 w-20 h-24 rounded-lg">
+                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" onClick={()=>{
+                    changing_DisplayImage(singleData.gal_3_imgURL)
+                  }}>
+                  <img src={singleData.gal_3_imgURL} alt=""  className="w-full h-full rounded-lg object-cover"/>
+
                     {/* {gal_1_imgURL ? (
                         <GallaryImgShow
                         id={"gal_1_imgURL"} 
@@ -159,7 +176,7 @@ export default function SingleItem() {
                 className="bg-slate-200 w-full h-full rounded-lg "
               >
                 <img
-                  src={singleData.image}
+                  src={displayImage}
                   alt=""
                   className="w-full h-full rounded-lg object-fill"
                 />
