@@ -36,10 +36,28 @@ console.log(user)
     setSingleData(foundItem);
   }, []);
 
-  const changing_DisplayImage = (image)=> {
-    setDisplayIamge(image)
+  const changing_DisplayImage = (e)=> {
+    
+    console.log(e.target.id)
+    let temp;
+    if(e.target.id === "gal_1_imgURL")
+    {
+      temp=singleData.gal_1_imgURL
+      singleData.gal_1_imgURL=displayImage
+    }
+    else if(e.target.id === "gal_2_imgURL")
+    {
+      temp=singleData.gal_2_imgURL
+      singleData.gal_2_imgURL=displayImage
+    }
+    else if(e.target.id === "gal_3_imgURL")
+    {
+      temp=singleData.gal_3_imgURL
+      singleData.gal_3_imgURL=displayImage
+    }
+    setDisplayIamge(temp)
+    
   }
-
   const { review, rating, user_id, item_id } = formData;
 
   console.log(formData);
@@ -99,10 +117,10 @@ console.log(user)
             <div>
               {singleData.gal_1_imgURL && (
                 <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
-                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" onClick={()=>{
-                    changing_DisplayImage(singleData.gal_1_imgURL)
-                  }}>
-                  <img src={singleData.gal_1_imgURL} alt=""  className="w-full h-full rounded-lg object-cover"/>
+                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" >
+                  <img src={singleData.gal_1_imgURL} id="gal_1_imgURL" onClick={
+                    changing_DisplayImage
+                  } alt=""  className="w-full h-full rounded-lg object-cover"/>
 
                     {/* {gal_1_imgURL ? (
                         <GallaryImgShow
@@ -123,10 +141,10 @@ console.log(user)
             <div>
               {singleData.gal_2_imgURL && (
                 <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
-                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" onClick={()=>{
-                    changing_DisplayImage(singleData.gal_2_imgURL)
-                  }}>
-                    <img src={singleData.gal_2_imgURL} alt=""  className="w-full h-full rounded-lg object-cover"/>
+                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" >
+                    <img src={singleData.gal_2_imgURL} id="gal_2_imgURL" onClick={
+                    changing_DisplayImage
+                  } alt=""  className="w-full h-full rounded-lg object-cover"/>
                     {/* {gal_1_imgURL ? (
                         <GallaryImgShow
                         id={"gal_1_imgURL"} 
@@ -145,11 +163,11 @@ console.log(user)
             </div>
             <div>
               {singleData.gal_3_imgURL && (
-                <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center">
-                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer" onClick={()=>{
-                    changing_DisplayImage(singleData.gal_3_imgURL)
-                  }}>
-                  <img src={singleData.gal_3_imgURL} alt=""  className="w-full h-full rounded-lg object-cover"/>
+                <div className="bg-slate-50 w-24 h-28 rounded-md flex items-center justify-center" >
+                  <div className="bg-slate-300 w-20 h-24 rounded-lg cursor-pointer"  >
+                  <img src={singleData.gal_3_imgURL} id="gal_3_imgURL" onClick={
+                    changing_DisplayImage
+                  } alt=""  className="w-full h-full rounded-lg object-cover"/>
 
                     {/* {gal_1_imgURL ? (
                         <GallaryImgShow
