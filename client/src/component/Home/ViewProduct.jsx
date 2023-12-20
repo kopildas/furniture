@@ -162,12 +162,12 @@ export default function ViewProduct({ visible, data, onClose }) {
           >
             Close
           </button>
-          <button
+          {/* <button
             onClick={onChange}
             className="px-3 py-0 text-lg text-white duration-150 ease-in-out bg-red-600 rounded hover:bg-red-700"
           >
             Delete Item
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
