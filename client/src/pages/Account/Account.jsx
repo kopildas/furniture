@@ -32,7 +32,7 @@ export default function Account() {
       [e.target.id]: e.target.value,
     }));
   }
-  console.log(user)
+
 
   async function handleEditUserData(e) {
     e.preventDefault();
@@ -44,7 +44,7 @@ export default function Account() {
     }else if(user._id){
       id=user._id
     }
-    console.log(id)
+
     const phoneRegex = /^[0-9]+$/;
     const isPhoneNumberValid = phoneRegex.test(formData.phone);
 
@@ -67,11 +67,11 @@ export default function Account() {
           `${import.meta.env.VITE_LINK}/auth/${id}`,
           formData
         );
-        console.log(response);
-        toast.success("Product Updated succesfully..!")
+
+        toast.success("User Updated succesfully..!")
         // onClose()
         // const { user } = response.data;
-        console.log(response.data.user);
+
         // console.log(token);
         dispatch({
           type: actionType.REGISTER_USER_UPDATE,
@@ -82,10 +82,9 @@ export default function Account() {
         setSave(false);
       } catch (err) {
         const responseText = err.response.data;
-  
-        console.log(responseText);
+
         toast.error(responseText.msg);
-        console.log(err);
+
       }
     }
 
