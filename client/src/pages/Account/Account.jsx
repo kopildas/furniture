@@ -61,7 +61,7 @@ export default function Account() {
       toast.error("Email is not valid.");
     }
 
-    if(isEmailValid && isPhoneNumberValid && formData.phone.length === 11){
+    if(isEmailValid && isPhoneNumberValid && formData.phone.length === 11 && save){
       try {
         const response = await axios.put(
           `${import.meta.env.VITE_LINK}/auth/${id}`,
