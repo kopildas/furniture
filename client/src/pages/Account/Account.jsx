@@ -3,13 +3,14 @@ import { useStateValue } from "../../context/StateProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { actionType } from "../../context/reducer";
+import { useNavigate } from "react-router-dom";
 
 export default function Account() {
   const [{ product, cartShow, user, cartItems, favorite_Items }, dispatch] =
     useStateValue();
 
   const [save, setSave] = useState(false);
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: user.name,
     lastname: user.lastname,
@@ -87,9 +88,16 @@ export default function Account() {
 
       }
     }
-
-
   }
+
+
+  const onLogOut = () => {
+    localStorage.removeItem(user);
+    dispatch({
+              type: actionType.DEL_USER,
+            });
+    navigate("/");
+  };
 
   return (
     <div className="mt-20 text-gray-900 flex items-center justify-center">
@@ -145,14 +153,22 @@ export default function Account() {
             />
           </div>
 
-          <button
-            className={`${
-              save ? "bg-amber-700 hover:bg-amber-800" : "bg-gray-400"
-            } w-20  text-white font-medium uppercase  transition duration-150 ease-in-out shadow-lg py-2 rounded-lg`}
-            type="submit"
-          >
-            save
-          </button>
+          <div className="flex items-start justify-between">
+            <button
+              className={`${
+                save ? "bg-amber-700 hover:bg-amber-800" : "bg-gray-400"
+              } w-20  text-white font-medium uppercase  transition duration-150 ease-in-out shadow-lg py-2 rounded-lg`}
+              type="submit"
+            >
+              save
+            </button>
+            <button
+              className={`w-24 bg-amber-700 hover:bg-amber-800 text-white font-medium uppercase  transition duration-150 ease-in-out shadow-lg py-2 rounded-lg`}
+              onClick={onLogOut}
+            >
+              Log out
+            </button>
+          </div>
         </form>
       </div>
     </div>
