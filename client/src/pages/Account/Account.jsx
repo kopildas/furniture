@@ -3,13 +3,14 @@ import { useStateValue } from "../../context/StateProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { actionType } from "../../context/reducer";
+import { useNavigate } from "react-router-dom";
 
 export default function Account() {
   const [{ product, cartShow, user, cartItems, favorite_Items }, dispatch] =
     useStateValue();
 
   const [save, setSave] = useState(false);
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: user.name,
     lastname: user.lastname,
@@ -32,7 +33,7 @@ export default function Account() {
       [e.target.id]: e.target.value,
     }));
   }
-  console.log(user)
+
 
   async function handleEditUserData(e) {
     e.preventDefault();
@@ -44,7 +45,7 @@ export default function Account() {
     }else if(user._id){
       id=user._id
     }
-    console.log(id)
+
     const phoneRegex = /^[0-9]+$/;
     const isPhoneNumberValid = phoneRegex.test(formData.phone);
 
@@ -61,17 +62,17 @@ export default function Account() {
       toast.error("Email is not valid.");
     }
 
-    if(isEmailValid && isPhoneNumberValid && formData.phone.length === 11){
+    if(isEmailValid && isPhoneNumberValid && formData.phone.length === 11 && save){
       try {
         const response = await axios.put(
           `${import.meta.env.VITE_LINK}/auth/${id}`,
           formData
         );
-        console.log(response);
-        toast.success("Product Updated succesfully..!")
+
+        toast.success("User Updated succesfully..!")
         // onClose()
         // const { user } = response.data;
-        console.log(response.data.user);
+
         // console.log(token);
         dispatch({
           type: actionType.REGISTER_USER_UPDATE,
@@ -82,15 +83,21 @@ export default function Account() {
         setSave(false);
       } catch (err) {
         const responseText = err.response.data;
-  
-        console.log(responseText);
+
         toast.error(responseText.msg);
-        console.log(err);
+
       }
     }
-
-
   }
+
+
+  const onLogOut = () => {
+    localStorage.removeItem(user);
+    dispatch({
+              type: actionType.DEL_USER,
+            });
+    navigate("/");
+  };
 
   return (
     <div className="mt-20 text-gray-900 flex items-center justify-center">
@@ -146,14 +153,22 @@ export default function Account() {
             />
           </div>
 
-          <button
-            className={`${
-              save ? "bg-amber-700 hover:bg-amber-800" : "bg-gray-400"
-            } w-20  text-white font-medium uppercase  transition duration-150 ease-in-out shadow-lg py-2 rounded-lg`}
-            type="submit"
-          >
-            save
-          </button>
+          <div className="flex items-start justify-between">
+            <button
+              className={`${
+                save ? "bg-amber-700 hover:bg-amber-800" : "bg-gray-400"
+              } w-20  text-white font-medium uppercase  transition duration-150 ease-in-out shadow-lg py-2 rounded-lg`}
+              type="submit"
+            >
+              save
+            </button>
+            <button
+              className={`w-24 bg-amber-700 hover:bg-amber-800 text-white font-medium uppercase  transition duration-150 ease-in-out shadow-lg py-2 rounded-lg`}
+              onClick={onLogOut}
+            >
+              Log out
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -67,6 +67,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: null,
+         token: null,
       };
     case actionType.SET_PRODUCTS:
       return {
